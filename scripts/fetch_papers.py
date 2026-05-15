@@ -8,10 +8,13 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import email.utils
 import html
 import json
+import random
 import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -19,8 +22,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
-ARXIV_APIS = ("https://export.arxiv.org/api/query", "http://export.arxiv.org/api/query")
+ARXIV_APIS = ("https://export.arxiv.org/api/query",)
 ATOM_NS = {"atom": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
+DEFAULT_RETRY_BASE_SECONDS = 30.0
+MAX_RETRY_DELAY_SECONDS = 180.0
 
 
 @dataclass(frozen=True)
@@ -170,6 +175,34 @@ def build_query(terms: Iterable[str]) -> str:
     return f"({term_query}) AND ({category_query})"
 
 
+def parse_retry_after(value: Optional[str]) -> Optional[float]:
+    if not value:
+        return None
+    try:
+        return max(0.0, float(value))
+    except ValueError:
+        try:
+            retry_at = email.utils.parsedate_to_datetime(value)
+        except (TypeError, ValueError):
+            return None
+        if retry_at is None:
+            return None
+        if retry_at.tzinfo is None:
+            retry_at = retry_at.replace(tzinfo=dt.timezone.utc)
+        return max(0.0, (retry_at - dt.datetime.now(dt.timezone.utc)).total_seconds())
+
+
+def retry_delay_seconds(error: BaseException, attempt: int) -> float:
+    if isinstance(error, urllib.error.HTTPError) and error.code == 429:
+        retry_after = parse_retry_after(error.headers.get("Retry-After"))
+        if retry_after is not None:
+            return min(retry_after, MAX_RETRY_DELAY_SECONDS)
+        delay = DEFAULT_RETRY_BASE_SECONDS * (2 ** (attempt - 1))
+        return min(delay + random.uniform(0, 5), MAX_RETRY_DELAY_SECONDS)
+
+    return min(6.0 * attempt, 18.0)
+
+
 def fetch_category(category_key: str, config: CategoryConfig, per_category: int, retries: int) -> List[dict]:
     params = {
         "search_query": build_query(config.query_terms),
@@ -197,7 +230,11 @@ def fetch_category(category_key: str, config: CategoryConfig, per_category: int,
             except (OSError, TimeoutError, ET.ParseError) as error:
                 last_error = error
                 if attempt < retries:
-                    time.sleep(min(6 * attempt, 18))
+                    delay = retry_delay_seconds(error, attempt)
+                    print(f"Retrying {config.label} in {delay:.1f}s after {error}", flush=True)
+                    time.sleep(delay)
+                elif isinstance(error, urllib.error.HTTPError) and error.code == 429:
+                    break
 
     raise RuntimeError(f"failed to fetch {config.label}: {last_error}")
 
@@ -319,14 +356,27 @@ def sort_key(paper: dict) -> str:
     return paper.get("published") or paper.get("updated") or ""
 
 
+def write_payload(output: Path, papers: List[dict]) -> None:
+    payload = {
+        "updated_at": utc_now_iso(),
+        "source": "arXiv API",
+        "category_labels": {key: cfg.label for key, cfg in CATEGORIES.items()},
+        "papers": papers,
+    }
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fetch categorized robotics papers from arXiv.")
     parser.add_argument("--output", default="data/papers.json", help="JSON file to write")
     parser.add_argument("--per-category", type=int, default=40, help="arXiv records to fetch for each category")
     parser.add_argument("--days", type=int, default=14, help="Keep papers published in the last N days; 0 keeps all fetched papers")
     parser.add_argument("--limit", type=int, default=120, help="Maximum papers to keep in the output")
-    parser.add_argument("--sleep", type=float, default=3.1, help="Seconds between arXiv API requests")
-    parser.add_argument("--retries", type=int, default=2, help="Retries per arXiv endpoint")
+    parser.add_argument("--sleep", type=float, default=8.0, help="Seconds between arXiv API requests")
+    parser.add_argument("--retries", type=int, default=4, help="Retries per arXiv endpoint")
+    parser.add_argument("--fail-when-stale", action="store_true", help="Fail instead of keeping the existing output when every fetch fails")
     args = parser.parse_args()
 
     output = Path(args.output)
@@ -338,27 +388,22 @@ def main() -> None:
             incoming = fetch_category(key, config, args.per_category, args.retries)
         except RuntimeError as error:
             print(error, flush=True)
-            continue
-        merge_papers(papers_by_id, incoming)
+        else:
+            merge_papers(papers_by_id, incoming)
         if index < len(CATEGORIES) - 1:
             time.sleep(args.sleep)
 
     if not papers_by_id:
+        if output.exists() and not args.fail_when_stale:
+            print(f"No papers were fetched. Keeping existing {output} because arXiv is unavailable or rate limited.", flush=True)
+            return
         raise SystemExit("No papers were fetched. Check network access or arXiv API availability.")
 
     papers = enrich_papers(list(papers_by_id.values()))
     papers = filter_recent(papers, args.days)
     papers = sorted(papers, key=sort_key, reverse=True)[: args.limit]
 
-    payload = {
-        "updated_at": utc_now_iso(),
-        "source": "arXiv API",
-        "category_labels": {key: cfg.label for key, cfg in CATEGORIES.items()},
-        "papers": papers,
-    }
-
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_payload(output, papers)
     print(f"Wrote {len(papers)} papers to {output}", flush=True)
 
 
