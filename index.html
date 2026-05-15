@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Embodied AI Paper Radar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily autonomous paper briefing</p>
+        <h1>Embodied AI Paper Radar</h1>
+        <p class="subtitle">每天自动抓取 arXiv 最新论文，并按 Manipulation、Vision-Language-Action、UAV、Humanoid 等方向整理。</p>
+      </div>
+      <div class="hero-card">
+        <span class="label">Last Update</span>
+        <strong id="updatedAt">Loading...</strong>
+        <small>无需手动 fetch，数据由定时任务生成</small>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="筛选工具栏">
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="搜索标题、摘要、关键词..." autocomplete="off" />
+      </div>
+      <div id="categoryTabs" class="tabs"></div>
+    </section>
+
+    <section class="stats" id="stats"></section>
+    <section id="paperGrid" class="paper-grid" aria-live="polite"></section>
+    <section id="emptyState" class="empty" hidden>
+      <h2 id="emptyTitle">没有匹配的论文</h2>
+      <p id="emptyText">换一个关键词或分类试试。</p>
+    </section>
+  </main>
+
+  <template id="paperCardTemplate">
+    <article class="paper-card">
+      <div class="card-topline">
+        <span class="category"></span>
+        <span class="date"></span>
+      </div>
+      <h2 class="title"></h2>
+      <p class="summary"></p>
+      <div class="keywords"></div>
+      <div class="links"></div>
+    </article>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+name: Update Papers
+
+on:
+  schedule:
+    # 08:20 Asia/Shanghai every day.
+    - cron: '20 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch latest arXiv papers
+        run: python scripts/fetch_papers.py --output data/papers.json --days 14 --per-category 45 --limit 140
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update paper feed'
+          file_pattern: data/papers.json
