@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-21T03:48:32Z",
+  "updated_at": "2026-07-22T03:49:55Z",
   "source": "arXiv API",
   "category_labels": {
     "manipulation": "Manipulation",
@@ -8,6 +8,753 @@
     "humanoid": "Humanoid"
   },
   "papers": [
+    {
+      "id": "2607.19306v1",
+      "title": "From Distances to Trajectories: Real-Time Signed Distance Function Mapping and Distance-Accelerated Motion Planning for UAVs",
+      "abstract": "Autonomous flight in cluttered environments requires a robot to build a geometric map of its surroundings and plan safe, dynamically feasible trajectories, all onboard and in real time. Conventional approaches treat mapping and planning as separate stages and often rely on binary occupancy for collision checking. We argue that these two stages should be co-designed around a single representation: a signed distance function (SDF). By encoding distance to the nearest obstacle, an SDF provides richer information for planning and trajectory optimization than occupancy alone. We develop an Octree REsidual Network (OREN) that pairs an explicit octree prior with an implicit neural residual to reconstruct SDFs online from point cloud observations with the efficiency of volumetric methods and the accuracy and differentiability of neural methods. In tandem, we develop Bubble$^\\star$, a search-based planner that exploits the distance information to grow maximal collision-free balls, which we call bubbles, with formal guarantees of termination, completeness, and failure detection. Planning over a graph of bubbles significantly reduces collision checks compared to a grid-based A$^\\star$ search and returns a bubble sequence that forms a safe corridor for trajectory optimization. We demonstrate the integrated OREN-Bubble$^\\star$ approach onboard a quadrotor, navigating unseen indoor environments in real time under tight compute constraints. OREN improves SDF estimation by $22$% compared to baselines, while Bubble$^\\star$ finds trajectories spanning $\\approx 90$ m through a cluttered environment in $1$-$3$ sec., whereas baselines take up to $10$ sec. in the same environment.",
+      "authors": [
+        "Jason Stanley",
+        "Zhirui Dai",
+        "Qihao Qian",
+        "Tzu-Chin Ho",
+        "Tianxing Fan",
+        "Siddharth Saha",
+        "Christopher Barngrover",
+        "Ki Myung Brian Lee",
+        "Nikolay Atanasov"
+      ],
+      "published": "2026-07-21T17:18:46Z",
+      "updated": "2026-07-21T17:18:46Z",
+      "arxiv_categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV",
+        "eess.SY"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.19306v1",
+        "pdf": "https://arxiv.org/pdf/2607.19306v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "quadrotor",
+        "flight",
+        "planning",
+        "cs.RO",
+        "cs.AI",
+        "cs.CV",
+        "eess.SY"
+      ]
+    },
+    {
+      "id": "2607.19288v1",
+      "title": "No Training, Better Flights: Test-Time Scaled VLMs for UAV Navigation",
+      "abstract": "Test-time scaling offers a promising method to improve the inference performance of Vision-Language Models (VLMs) without additional training. Existing approaches to vision-language navigation (VLN) for Unmanned Aerial Vehicle (UAV) typically relies on a single inference pass, which can falter in complex environments by producing suboptimal or unsafe trajectories. In this paper, we explore a simple and effective approach to apply test-time scaling to VLN for UAV. We enhance navigation reasoning through an iterative refinement process that requires no extra model training, guiding the model to re-evaluate its initial navigation plan for better accuracy and safety. Our method first prompts the model to generate multiple parallel candidates and then performs a self-correction step, achieving deeper and more robust planning without changing the underlying model. To further strengthen decision-making, we design a multi-criteria scoring function to evaluate the refined candidates based on safety, goal alignment, and forward-progress. This simple yet powerful combination enables a frozen UAV navigation VLMs to self-correct and generate more accurate and reliable flight plans, achieving SOTA performance in this task.",
+      "authors": [
+        "Feinan Cheng",
+        "Dongliang Xu",
+        "Wenli Nong",
+        "Zhiheng Zhang",
+        "Ang Liu",
+        "Tianyu Wang",
+        "Yue Yao"
+      ],
+      "published": "2026-07-21T16:59:12Z",
+      "updated": "2026-07-21T16:59:12Z",
+      "arxiv_categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.19288v1",
+        "pdf": "https://arxiv.org/pdf/2607.19288v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "aerial",
+        "flight",
+        "navigation",
+        "planning",
+        "cs.CV",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.19040v1",
+      "title": "Gaze-DETR: Top-Down Guidance Through Priority Maps for Infrared Weak-Small UAV Detection with DETR",
+      "abstract": "Infrared small target detection (ISTD) remains challenging because tiny, low-contrast targets are easily overwhelmed by clutter, noise, or occlusion. Conventional single-frame and multi-frame detectors rely on bounding-box supervision, which specifies final target locations but offers little explicit guidance for prioritizing candidate regions or preserving weak-target evidence before localization. Task-driven visual search offers such guidance: top-down goals and visual evidence jointly form a spatial priority map that ranks candidate locations. Building on this principle, we propose Gaze-DETR, a bio-inspired detector that learns an internal priority map before localization. First, a priority head predicts a normalized priority map from image features. Second, Residual Priority-Guided Feature Modulation (RPFM) enhances high-priority responses while retaining multi-scale features. Finally, Priority-Guided Anchor Query Injection (PAQI) converts high-priority locations into decoder anchor queries. We train the priority head using three supervision schemes: box-derived Gaussian maps; real-gaze maps constructed from fixation-density maps; and transferred pseudo-gaze maps learned from gaze--box relations in paired annotations and applied to Anti-UAV410 training boxes. To support the latter two schemes, we construct TIR-UAV120-Gaze with paired detection and task-driven eye-tracking annotations. On TIR-UAV120-Gaze, Gaze-DETR achieves 85.76 mAP$_{50}$ and 88.77 F1 with box-derived supervision, and 86.18 mAP$_{50}$ and 89.00 F1 with real-gaze supervision. On Anti-UAV410, it achieves 87.06 mAP$_{50}$ and 90.90 F1 with box-derived supervision, and 87.08 mAP$_{50}$ and 90.43 F1 with transferred pseudo-gaze supervision. These results show that explicit spatial-priority learning provides pre-localization guidance complementary to bounding-box supervision across annotation settings and costs.",
+      "authors": [
+        "Nian Liu",
+        "Yuxin Yang",
+        "Shubo Lin",
+        "Sikui Zhang",
+        "Liang Li",
+        "Boyu Cai",
+        "Yizheng Wang",
+        "Weiming Hu",
+        "Jin Gao"
+      ],
+      "published": "2026-07-21T12:29:58Z",
+      "updated": "2026-07-21T12:29:58Z",
+      "arxiv_categories": [
+        "cs.CV"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.19040v1",
+        "pdf": "https://arxiv.org/pdf/2607.19040v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "2607.18950v1",
+      "title": "Design and stability analysis of an underactuated hand with passively rotating fingers",
+      "abstract": "This paper presents an innovative design and stability analysis of an underactuated robotic finger with spatial mobility, designed to enhance gripping dexterity in robotic hands. The finger architecture incorporates a revolute joint at its base, enabling passive spatial rotation that facilitates both cylindrical and spherical grasping. With only two phalanges per finger, the design simplifies kinematic complexity while supporting precision and enveloping grasps. Stability criteria, based on the moment at the finger base joint induced by contact forces, are introduced to ensure reliable object gripping and prevent ejection during manipulation. The study also examines a differential mechanism that distributes a single actuation torque across multiple fingers, allowing adaptive and coordinated motion. This mechanism enhances the hand's ability to grasp diverse object shapes with minimal pre-grasp adjustments, leveraging passivity for autonomous adaptation. Theoretical findings are experimentally validated using a fully mechanical prototype, demonstrating versatility in performing cylindrical, spherical, parallel, and enveloping grasps. The integration of underactuation-both within individual fingers and among multiple fingers-reduces mechanical complexity, cost, and control demands while preserving functional adaptability. This work advances the development of compliant robotic hands suitable for applications requiring dexterity and robustness, such as agricultural robotics, logistics, assistive technologies, and waste sorting. Future research will focus on automating actuation and refining control strategies to further improve grasp stability and precision, paving the way for autonomous manipulation in unstructured environments.",
+      "authors": [
+        "Léonie Plancoulaine",
+        "Sylvain Guégan",
+        "Franck Plestan",
+        "Damien Chablat"
+      ],
+      "published": "2026-07-21T10:37:18Z",
+      "updated": "2026-07-21T10:37:18Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "manipulation"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18950v1",
+        "pdf": "https://arxiv.org/pdf/2607.18950v1"
+      },
+      "primary_category": "manipulation",
+      "categories": [
+        "Manipulation"
+      ],
+      "category_keys": [
+        "manipulation"
+      ],
+      "category_color": "#e56f3d",
+      "keywords": [
+        "manipulation",
+        "grasping",
+        "control",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.18936v1",
+      "title": "NGPS: GPS-Denied Aerial Geo-Localization and 2.5D Reconstruction via Deep Satellite Image Matching and Multi-Rate Sensor Fusion",
+      "abstract": "We present NGPS (Next-Generation Positioning System), a visual geo-localization framework for high-altitude UAVs that provides GPS-free absolute positioning by matching down-facing images to georeferenced satellite imagery with deep features. The system combines (1) adaptive confidence-weighted UKF fusion, where NGPS covariance is modulated by RANSAC inlier ratio, reprojection error, and match confidence; (2) velocity-predictive kernel extraction, using VIO velocity to predict the satellite search region; and (3) an asynchronous multi-rate temporal priority queue that interleaves absolute position (1-2 Hz), VIO (10-20 Hz), and IMU (100-200 Hz) updates in chronological order. Globally optimized poses from VINS pose-graph optimization, anchored by NGPS corrections, further enable real-time 2.5D georeferenced orthomosaic reconstruction. On five flight sequences (60-150 m AGL), NGPS achieves 2.94 m position RMSE, with worst-case ATE 6.04 m at 150 m AGL and 2 m/s, yielding a 3.5x improvement over standalone monocular VIO. The system runs in real time on an NVIDIA Jetson Orin NX. Part of the implementation is open-sourced at https://github.com/snktshrma/ngps_flight.",
+      "authors": [
+        "Sanket Sharma"
+      ],
+      "published": "2026-07-21T10:20:08Z",
+      "updated": "2026-07-21T10:20:08Z",
+      "arxiv_categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18936v1",
+        "pdf": "https://arxiv.org/pdf/2607.18936v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "aerial",
+        "flight",
+        "cs.RO",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "2607.18874v1",
+      "title": "Reinforcement Learning for Delivery Drone-Based Participatory Sensing in Dynamic Environments",
+      "abstract": "Using Unmanned Aerial Vehicle (UAV) for urban sensing has emerged as a powerful paradigm to monitor the status of the city, e.g., air quality and noise levels, through agile aerial crowdsourcing. Despite this potential, existing UAV-based sensing approaches overlook environmental disturbances like wind that drastically impact drone velocity and energy efficiency. Consequently, directly applying existing methods to this joint delivery and sensing paradigm in dynamic environments faces two severe challenges: (1) scalability bottlenecks as fleet sizes expand; and (2) multi-timescale decision heterogeneity between macro task dispatching and micro velocity control. To tackle these, we formalize the problem as SensUAV and propose a Two TimeScale Reinforcement Learning framework (TSRL). Specifically, TSRL separates decision-making into two cooperative layers. At the macro level, a task-embedding sensing dispatcher handles scalability by separately encoding distinct task features and sequentially evaluating UAV suitability before task selection. At the micro level, a wind-aware velocity controller learns fine-grained velocity scheduling to adapt to dynamic environmental variations. Extensive experiments on real-world datasets demonstrate that TSRL significantly outperforms baselines, achieving average system profit improvements of 20.1% in Hangzhou and 46.6% in Shanghai.",
+      "authors": [
+        "Xin Ouyang",
+        "Songxin Lei",
+        "Xusen Guo",
+        "Yutian Jiang",
+        "Sijie Ruan",
+        "Yuxuan Liang"
+      ],
+      "published": "2026-07-21T09:06:23Z",
+      "updated": "2026-07-21T09:06:23Z",
+      "arxiv_categories": [
+        "cs.LG",
+        "cs.CY"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18874v1",
+        "pdf": "https://arxiv.org/pdf/2607.18874v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "drone",
+        "aerial",
+        "reinforcement learning",
+        "control",
+        "dataset",
+        "cs.LG",
+        "cs.CY"
+      ]
+    },
+    {
+      "id": "2607.18840v1",
+      "title": "WorldScape Policy 2.0: Empowering Steerable World Action Modeling with Reasoning-Augmented Memory",
+      "abstract": "World Action Models (WAMs) offer a promising paradigm for robotic manipulation by jointly modeling visual state transitions and robot actions. However, existing WAMs are constrained by limited temporal context, coarse episode-level language supervision, and predominantly text-only conditioning, which hinder task-progress tracking and fine-grained language-video-action grounding while limiting visual-context reasoning and cross-embodiment transfer. In this paper, we introduce WorldScape Policy 2.0, a controllable WAM with reasoning-augmented long short-term memory. Its causal short-term visual memory supplies recent observations as DiT prefill to preserve local interaction dynamics, while its long short-term event memory organizes historical VLM outputs into global-history, local-active, and event-boundary representations for progress-aware retrieval. The retrieved history augments perception and autoregressively generated planning tokens, yielding an implicit subgoal condition for autonomous planning; semantic forcing further transfers event-level instruction semantics into this latent planning pathway. To establish fine-grained multimodal controllability, we construct ManipEvent-5M, an event-grounded embodied pretraining dataset containing nearly 5 million event segments with aligned action trajectories, episode-level task instructions, segment-level subtask captions, goal images, and video demonstrations. These designs provide a unified interface for autonomous planning from high-level instructions and controllable execution from fine-grained text, goal-image, or video-context prompts. Experiments in both simulation and real-world platforms demonstrate superior capabilities in long-horizon autonomous planning, fine-grained instruction following and in-context adaptation.",
+      "authors": [
+        "Haisheng Su",
+        "Zongdai Liu",
+        "Xin Jin",
+        "Haoxuan Dou",
+        "Chengming Hu",
+        "Baorun Li",
+        "Zhanwang Liu",
+        "Ruiyan Xu",
+        "Jianjie Fang",
+        "Xin Zhang",
+        "Zhenjie Yang",
+        "Xue Yang",
+        "Chen Gao",
+        "Junchi Yan",
+        "Yong Li",
+        "Wei Wu"
+      ],
+      "published": "2026-07-21T08:25:37Z",
+      "updated": "2026-07-21T08:25:37Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "manipulation"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18840v1",
+        "pdf": "https://arxiv.org/pdf/2607.18840v1"
+      },
+      "primary_category": "manipulation",
+      "categories": [
+        "Manipulation",
+        "Vision-Language-Action"
+      ],
+      "category_keys": [
+        "manipulation",
+        "vla"
+      ],
+      "category_color": "#e56f3d",
+      "keywords": [
+        "manipulation",
+        "multimodal",
+        "planning",
+        "control",
+        "perception",
+        "dataset",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.18779v1",
+      "title": "CGMap: A Geospatially Aware Deep Learning Framework for Crop Gap Mapping Using UAV",
+      "abstract": "In India, crop germination is primarily monitored by visual inspection and manual counting, which are prone to errors, despite their crucial role in determining eventual yield potential. This paper highlights a deep learning based pipeline which uses object detection methods and drone imagery to assess and provide a precise count of sugarcane germination in fields. The approch uses a pre-trained AI model to find germinated plant sampling and identify gaps, also known as ``bald spots'', which restricts field productivity. The techniques used here relies on the YOLOV8 architecture, which was trained on a carefully selected dataset of UAV photos taken in various agroclimatic zones of India. Here, we bring upon a novel orientation-normalization technique that uses minimum Spanning Trees (MST) to account for variations in planting geometry, allowing for dependable row and column extraction across a variety of field layouts. By converting detected seedlings into spatial point clouds, emergence gaps can be inferred from the anticipated spacing between plants. A geospatial germination map exported in Well-Known Text (WKT) format is the end result, and it can be easily incorporated into GIS platforms used by sugar mills and agronomists to direct transplant initiatives. Timely interventions based on the insights provided by the algorithm can significantly increase yield, resulting in higher profits. Hence, support proper allocation of resources, avoid wastage, and enhance long-term sustainability.",
+      "authors": [
+        "Karan Sharma",
+        "Rajiv Ranjan",
+        "Dinesh Kumar",
+        "Shashank Tamaskar"
+      ],
+      "published": "2026-07-21T07:01:01Z",
+      "updated": "2026-07-21T07:01:01Z",
+      "arxiv_categories": [
+        "cs.CV"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18779v1",
+        "pdf": "https://arxiv.org/pdf/2607.18779v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "drone",
+        "dataset",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "2607.18768v1",
+      "title": "Cross-Modal UAV Object Tracking: State-Aware Representation Learning and A Unified Benchmark",
+      "abstract": "Unmanned Aerial Vehicle (UAV) object tracking has emerged as a popular research field with broad practical applications. Modern UAVs are increasingly equipped with both visible light and thermal infrared sensors. However, due to constraints in communication bandwidth, computational resources and power consumption, current systems often activate one modality and switch between modalities to maintain robust tracking in complex scenarios. Such modality switch inevitably leads to significant appearance change and sudden spatial shift, posing great challenges for existing tracking algorithms. To handle this problem, we propose a novel State-Aware Representation Learning Approach called SARLA, which perceives the inconsistent modality states of current frame with template and last frame in the target representations to adapt to the sudden changes in both appearance and position, for robust cross-modal object tracking. In particular, we propose the Modality State Aware Representation Module (MSARM) and Spatial State Aware Representation Module (SSARM). MSARM guides the model to learn appearance correlation, bridging the modality gap, while SSARM models cross-frame spatial correlation to mitigate sudden spatial shift impacts. In addition, we design a spatial shift prediction loss to further handle the effects of spatial variation caused by modality switch. To promote the development of this research field, we establish a large-scale video benchmark called CM-UOT, which consists of 1079 cross-modal sequences with an average video length greater than 621 frames and encompasses over 671K frames in total. Extensive experiments on CM-UOT dataset demonstrate the superior performance of the proposed SARLA against 20 excellent tracking methods. The source code, datasets, and evaluation protocols associated with this work are publicly available at: https://github.com/hongsmile365/sarla-.",
+      "authors": [
+        "Yun Xiao",
+        "Zhihong Hong",
+        "Jiandong Jin",
+        "Chenglong Li",
+        "Jin Tang",
+        "Amir Hussain"
+      ],
+      "published": "2026-07-21T06:52:01Z",
+      "updated": "2026-07-21T06:52:01Z",
+      "arxiv_categories": [
+        "cs.CV"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18768v1",
+        "pdf": "https://arxiv.org/pdf/2607.18768v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "aerial",
+        "dataset",
+        "benchmark",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "2607.18747v1",
+      "title": "SkyEV: RGB-Event UAV detection and tracking dataset and baseline",
+      "abstract": "Detecting UAVs in air spaces has become increasingly important due to UAVs widespread availability and easy usage. However, due to their small size, they are typically difficult to detect at a sufficient range. For the training of optimized detection algorithms, datasets have been published, covering optical sensing methods ranging from infrared to regular RGB to event-sensor-based. However, these datasets often fail to reflect realistic counter-UAV scenarios, lacking critical factors such as camera ego-motion, extremely small target scales, and diverse lens configurations, and introduce compression artefacts on the frame images. To address this gap, we introduce SkyEV, an open-source dataset featuring highly synchronized uncompressed RGB and event-based data. SkyEV distinguishes itself by capturing complex real-world conditions, including significant camera motion and varied optical setups, which are essential for testing the fundamental trade-off between Field of View and detection range. Furthermore, we provide a unified data loader and establish an experimental baseline using a multi-modal architecture, demonstrating the dataset's efficacy in detecting challenging, small-scale targets.",
+      "authors": [
+        "Jakub Mandula",
+        "Sebastian Heusinger",
+        "Julian Moosmann",
+        "Christian Vogt",
+        "Michele Magno"
+      ],
+      "published": "2026-07-21T06:12:06Z",
+      "updated": "2026-07-21T06:12:06Z",
+      "arxiv_categories": [
+        "cs.CV"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18747v1",
+        "pdf": "https://arxiv.org/pdf/2607.18747v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "dataset",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "2607.18737v1",
+      "title": "Motion Primitive Discovery in a Humanoid Robot via Self-Organising Maps for Phase Recognition",
+      "abstract": "Understanding the computational basis of action recognition is a central challenge in social cognition as well as in human-robot interaction. Inspired by the Mirror Neuron System (MNS), we propose a two-level architecture for motor primitive discovery and online phase recognition applied to the NICO humanoid robot. At the first level, two Self-Organising Maps (SOMs) learn topographic representations of arm kinematics (A-SOM) and hand kinematics (H-SOM) from simulated trials covering seven motor actions. The maps are trained on non-redundant features identified through hierarchical correlation analysis of motion trajectories. The results show that the two SOMs encode complementary aspects of motor behaviour. At the second level, an Echo State Network (ESN) evaluates whether temporal trajectories of SOM activations, represented by consecutive best-matching units, are sufficient for online recognition of the currently executed movement phase. The results show that SOM-based trajectories preserve the dominant phase-discriminative structure of the movement, while contextual information provides only a secondary refinement. Our contribution is the integration of established SOM and ESN methods within an MNS-inspired architecture for motor primitive representation and online phase recognition. The results are compatible with the computational hypothesis that self-organised motor representations, when temporally integrated, can support accurate online recognition of ongoing movement phases.",
+      "authors": [
+        "Radovan Gregor",
+        "Igor Farkaš"
+      ],
+      "published": "2026-07-21T05:53:29Z",
+      "updated": "2026-07-21T05:53:29Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "humanoid"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18737v1",
+        "pdf": "https://arxiv.org/pdf/2607.18737v1"
+      },
+      "primary_category": "humanoid",
+      "categories": [
+        "Humanoid"
+      ],
+      "category_keys": [
+        "humanoid"
+      ],
+      "category_color": "#8e5a2f",
+      "keywords": [
+        "humanoid",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.18731v1",
+      "title": "Correct-by-Construction Behavior Tree Synthesis from Signal Temporal Logic Specifications with Application to Robotic Missions",
+      "abstract": "Behavior Trees (BTs) are widely adopted for complex task execution in robotics, providing modular, reactive control but lacking formal guarantees. However, existing correct-by-construction synthesis from Linear Temporal Logic (LTL) cannot express quantitative timing constraints. This letter synthesizes correct-by-construction BTs from Signal Temporal Logic (STL) specifications. The workspace is modeled as a timed transition system and abstracted into a zone graph, and an augmented state space tracking both logical progress and timing constraints is introduced. A hierarchical fixed-point algorithm computes winning sets for an STL fragment encompassing safety, reachability, response, recurrence, and persistence, yielding BT subtrees with a runtime constraint function. Correctness guarantees are proven and complexity bounds are derived. Simulations demonstrate specification satisfaction with strictly positive robustness, and a physical quadrotor experiment with six STL specifications validates practical deployability.",
+      "authors": [
+        "Jiaheng Dong",
+        "Jingyi Huang",
+        "Liang Han"
+      ],
+      "published": "2026-07-21T05:43:19Z",
+      "updated": "2026-07-21T05:43:19Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18731v1",
+        "pdf": "https://arxiv.org/pdf/2607.18731v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "quadrotor",
+        "control",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.18713v1",
+      "title": "Confidence-Gated Vision-Only Heading Alignment for UAV-UGV Cooperative Systems",
+      "abstract": "Vision-based heading prediction is useful for UAV--UGV cooperation, but accurate prediction alone does not guarantee that every predicted heading should be issued directly as a control command. This paper investigates the decision problem of when and how a fixed vision-based heading predictor should be trusted for command issuance. A lightweight confidence-gated framework is proposed in which execution decisions are made using two interpretable reliability proxies derived from the perception stream: bounding-box area as a visibility-related proxy and short-window variation in predicted heading as a stability-related proxy. During low-confidence intervals, the framework compares the baseline freeze-HOLD policy with a bounded-blend fallback that updates the issued command conservatively. The method is evaluated on a real UAV--UGV dataset under clean and perturbed conditions. The results show that confidence gating creates a clear trade-off among execution rate, executed-frame accuracy, issued-command accuracy, and smoothness. The results further show that sparse execution can cause severe stale-command error under the baseline freeze-HOLD policy, whereas the bounded-blend fallback substantially improves command-level behavior under the same gate decisions. These findings highlight that reliable perception-driven autonomy depends not only on prediction accuracy, but also on decision-aware command issuance during low-confidence",
+      "authors": [
+        "Reza Ahmari",
+        "Vahid Hemmati",
+        "Parham Kebria",
+        "Olusola Odeyomi",
+        "Kaushik Roy",
+        "Abdollah Homaifar"
+      ],
+      "published": "2026-07-21T05:09:32Z",
+      "updated": "2026-07-21T05:09:32Z",
+      "arxiv_categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18713v1",
+        "pdf": "https://arxiv.org/pdf/2607.18713v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "control",
+        "perception",
+        "dataset",
+        "cs.RO",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "2607.18709v1",
+      "title": "RoboInter1.5: A Holistic Intermediate Representation Suite for Embodied World Modeling and Robotic Manipulation",
+      "abstract": "Existing robot datasets remain expensive to curate, embodiment-specific, and insufficiently annotated with the fine-grained structure required for generalizable reasoning, execution, or long-horizon environment dynamics simulation. Building on our prior work, RoboInter1.0, we present RoboInter1.5, an extended and holistic suite of intermediate representations for both robotic manipulation and embodied world modeling. RoboInter1.5 provides a unified resource of data, benchmarks, and models centered on dense manipulation-oriented intermediate representations. Specifically, RoboInter-Data contains over 230k manipulation episodes across 571 scenes with dense per-frame annotations covering more than ten types of intermediate representations, including subtasks, primitive skills, object and gripper grounding, segmentation, affordance, grasp poses, contact points, motion traces, etc. Built upon these annotations, RoboInter-VQA introduces spatial and temporal embodied VQA tasks to benchmark and improve the intermediate-representation reasoning capabilities of our RoboInter-VLM. RoboInter-VLA further studies how such representations benefit action execution through implicit, explicit, and modular plan-then-execute paradigms. To better model the physical world, we further introduce RoboInter-World, which leverages intermediate representations as structured conditioning signals for controllable prediction of future world states. Extensive evaluations demonstrate that RoboInter1.5 provides a unified spatiotemporal scaffolding for intermediate representations. Rather than treating intermediate representations merely as interpretable signals, RoboInter1.5 conceptualizes them as a bidirectional interface that both regularizes low-level action spaces and constrains the latent rollouts of open-world physical simulators.",
+      "authors": [
+        "Ziqin Wang",
+        "Hao Li",
+        "Weijun Wang",
+        "Junhao Cai",
+        "Jia Zeng",
+        "Yilun Chen",
+        "Jiangmiao Pang",
+        "Si Liu"
+      ],
+      "published": "2026-07-21T05:05:01Z",
+      "updated": "2026-07-21T05:05:01Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "manipulation"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18709v1",
+        "pdf": "https://arxiv.org/pdf/2607.18709v1"
+      },
+      "primary_category": "manipulation",
+      "categories": [
+        "Manipulation",
+        "Vision-Language-Action"
+      ],
+      "category_keys": [
+        "manipulation",
+        "vla"
+      ],
+      "category_color": "#e56f3d",
+      "keywords": [
+        "manipulation",
+        "gripper",
+        "affordance",
+        "vla",
+        "world model",
+        "control",
+        "dataset",
+        "benchmark"
+      ]
+    },
+    {
+      "id": "2607.18668v1",
+      "title": "Rethinking Joint UAV Placement and Beamforming: A Correlation-Aware Geometric Approach",
+      "abstract": "In multiuser unmanned aerial vehicle (UAV)-assisted downlink communications, UAV placement and transmit beamforming are inherently coupled through the propagation geometry. However, fully joint design based on instantaneous channel state information (CSI) is impractical, because the small-scale fading depends on the UAV location to be optimized and thus is unavailable a priori. Moreover, existing joint placement and beamforming methods do not explicitly optimize the UAV position with respect to the geometry-dependent multiuser interference induced by inter-user steering correlation. To address this issue, we propose a correlation-aware geometric framework for joint UAV placement and beamforming. Specifically, the UAV position is first optimized based on long-term channel statistics, where the steering-vector correlation is incorporated into the placement design through a conservative Gaussian surrogate that avoids interference underestimation. The resulting nonconvex positioning problem is then handled using successive convex approximation, auxiliary-variable decoupling, and quadratic transform techniques. For the obtained UAV location, the transmit beamformer is then optimized using instantaneous CSI. Simulation results show that the proposed framework significantly improves the minimum user spectral efficiency by enhancing angular separability among users and reducing inter-user interference. These results demonstrate that UAV placement should be designed not only for desired-link enhancement but also for interference mitigation through geometry-aware user separation.",
+      "authors": [
+        "Chaeyeon Kim",
+        "Kisong Lee"
+      ],
+      "published": "2026-07-21T03:29:54Z",
+      "updated": "2026-07-21T03:29:54Z",
+      "arxiv_categories": [
+        "eess.SY"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18668v1",
+        "pdf": "https://arxiv.org/pdf/2607.18668v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "aerial",
+        "eess.SY"
+      ]
+    },
+    {
+      "id": "2607.18604v1",
+      "title": "Intelligent Multi-UAV Navigation in ITNTNs: A Hierarchical LLM Approach",
+      "abstract": "The deployment of high-speed Uncrewed Aerial Vehicles (UAVs) in 3D aerial highways necessitates robust coordination of physical flight kinematics and multi-tier network handovers. While Deep Reinforcement Learning (DRL) offers rapid tactical control, it lacks the zero-shot strategic reasoning required to quickly adapt to dynamic Integrated Terrestrial and Non-Terrestrial Networks (ITNTNs). Conversely, Large Language Models (LLMs) excel at semantic reasoning but suffer from high inference latency, rendering them unsuitable for real-time aerodynamic control. To bridge this gap, we propose a novel Hierarchical LLM-driven control framework. A massive cloud-based LLM deployed on a High-Altitude Platform Station (HAPS) manages slow-timescale global load balancing, while lightweight edge-LLMs on individual UAVs translate local observations into tactical sub-goals. These sub-goals guide a fast-timescale physical DRL controller to execute collision-free, handover-aware trajectories. Simulation results demonstrate that our agentic architecture significantly reduces collision rates and improves aggregate system throughput compared to existing baselines.",
+      "authors": [
+        "Zijiang Yan",
+        "Hao Zhou",
+        "Wael Jaafar",
+        "Jianhua Pei",
+        "Ping Wang",
+        "Halim Yanikomeroglu",
+        "Hina Tabassum"
+      ],
+      "published": "2026-07-21T00:34:42Z",
+      "updated": "2026-07-21T00:34:42Z",
+      "arxiv_categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG",
+        "cs.NI",
+        "eess.SY"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18604v1",
+        "pdf": "https://arxiv.org/pdf/2607.18604v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV",
+        "Vision-Language-Action"
+      ],
+      "category_keys": [
+        "uav",
+        "vla"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "aerial",
+        "flight",
+        "navigation",
+        "large language model",
+        "reinforcement learning",
+        "control",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.18580v1",
+      "title": "STeP: Signal Temporal Logic for Precise Specifications for Action Generation with Vision Language Models",
+      "abstract": "Vision-language-action (VLA) models have shown impressive generalization, but often lack interpretability and can struggle to follow precise natural language instructions that encode spatial, temporal, and logical requirements. We propose a hierarchical framework that uses Signal Temporal Logic (STL) as a shared representation connecting high-level language understanding with low-level robot execution. A high-level policy leverages a VLM to decompose language instructions into high-level subtasks, generate STL specifications for each subtask, and choose a low-level policy for executing each subtask. The STL specifications translate language-derived intent into precise constraints, and the low-level policy selection determines whether those constraints are enforced directly through STL-guided model-predictive control or monitored during execution of a learned policy for perceptually complex, or contact-rich behaviors. By integrating STL into plan validation, low-level policy, subtask monitoring, and replanning, our framework enables language-derived plans to be checked, optimized, and revised at runtime using a common formal structure. We evaluate the approach on a real-world tabletop domain, demonstrating how formal specifications can improve the precision, reliability, and interpretability of language-conditioned robot planning.",
+      "authors": [
+        "Kasra Torshizi",
+        "Anukriti Singh",
+        "Sidharth Mathur",
+        "Khuzema Habib",
+        "Leo Du",
+        "Pratap Tokekar"
+      ],
+      "published": "2026-07-20T23:26:32Z",
+      "updated": "2026-07-20T23:26:32Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "vla"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18580v1",
+        "pdf": "https://arxiv.org/pdf/2607.18580v1"
+      },
+      "primary_category": "vla",
+      "categories": [
+        "Vision-Language-Action",
+        "Manipulation"
+      ],
+      "category_keys": [
+        "vla",
+        "manipulation"
+      ],
+      "category_color": "#256d85",
+      "keywords": [
+        "vision-language-action",
+        "vla",
+        "vision language",
+        "language-conditioned",
+        "contact-rich",
+        "planning",
+        "control",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2607.18548v1",
+      "title": "Engineering Trustworthy Agentic AI for Critical Systems",
+      "abstract": "Agentic artificial intelligence systems, capable of autonomous perception, planning, tool use, and multi-step action, are increasingly proposed for critical engineering domains where decisions carry physical, operational, or economic consequences. This survey addresses a gap in current literature by treating trustworthiness, whether agentic behavior can be verified, audited, and trusted under the constraints that engineering practice actually requires, as a first-class engineering property, rather than evaluating agentic AI by task capability alone. The study adopts a trustworthiness model organized around five cross-cutting dimensions: safety and constraint satisfaction; robustness and reliability; transparency and interpretability; accountability and auditability; and privacy and security. This is mapped onto an agentic assurance workflow spanning perception through audit. Building on this foundation, agentic systems architectures, threats, concrete trust mechanisms, and quantitative metrics are surveyed for direct application in agentic systems development and evaluation. These principles are then examined across four constraint-bound engineering domains: power systems, autonomous vehicles/robotics/UAVs, high-performance computing, and communication networks, identifying recurring design patterns, shared failure modes, and domain-specific gaps. Synthesizing across those domains, agentic AI trustworthiness is shown to be a single problem, with a path outlined toward a reusable, cross-domain assurance framework analogous to the graded certification regimes used by mature safety-critical engineering fields.",
+      "authors": [
+        "Omar Al-Refai",
+        "Ibrahim Shahbaz",
+        "Adam Ali Husseinat",
+        "Michael Mandulak",
+        "Jaewon Kim",
+        "Eman Hammad"
+      ],
+      "published": "2026-07-20T22:28:16Z",
+      "updated": "2026-07-20T22:28:16Z",
+      "arxiv_categories": [
+        "cs.AI",
+        "cs.MA",
+        "eess.SY"
+      ],
+      "source_categories": [
+        "uav"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2607.18548v1",
+        "pdf": "https://arxiv.org/pdf/2607.18548v1"
+      },
+      "primary_category": "uav",
+      "categories": [
+        "UAV"
+      ],
+      "category_keys": [
+        "uav"
+      ],
+      "category_color": "#4f8f3a",
+      "keywords": [
+        "uav",
+        "planning",
+        "perception",
+        "cs.AI",
+        "cs.MA",
+        "eess.SY"
+      ]
+    },
     {
       "id": "2607.18236v1",
       "title": "Patch Policy: Efficient Embodied Control via Dense Visual Representations",
@@ -2393,7 +3140,7 @@
       ]
     },
     {
-      "id": "2607.15579v1",
+      "id": "2607.15579v2",
       "title": "PACE: Persona Adaptation through Conversational Elicitation in Human-Robot Interaction",
       "abstract": "Equipping humanoid robots with coherent and adaptable personas is crucial for fostering natural, engaging, and trustworthy human-robot interaction (HRI). However, existing approaches often rely on static, hard-coded identities that lack the flexibility to adapt to individual user contexts. In this paper, we present PACE (Persona Adaptation through Conversational Elicitation), a novel framework for the interactive generation and deployment of structured personas on the Ameca humanoid robot. Our system introduces an Interactive Persona Elicitation Pipeline, enabling the robot to dynamically synthesize a tailored, psychologically grounded identity through user Q&A. This elicitation process feeds into a persona prompt compilation phase, generating a structured persona prompt built upon multi-perspective dimensions. We detail the Embodied System Integration required to translate this structured specification into expressive, multimodal humanoid behaviors. Through a comprehensive empirical HRI evaluation, we assess the impact of dynamically generated personas on user trust, perceived anthropomorphism, persona consistency, personal relevance, and interaction quality compared to a generic baseline. These contributions establish a scalable pathway for deploying personalized, interactive, and reliable identities in embodied humanoid assistants. Video demo is available at: https://lipzh5.github.io/PACE/",
       "authors": [
@@ -2405,7 +3152,7 @@
         "Simon See"
       ],
       "published": "2026-07-17T02:45:52Z",
-      "updated": "2026-07-17T02:45:52Z",
+      "updated": "2026-07-21T07:43:08Z",
       "arxiv_categories": [
         "cs.RO",
         "cs.HC"
@@ -2414,8 +3161,8 @@
         "humanoid"
       ],
       "links": {
-        "abstract": "https://arxiv.org/abs/2607.15579v1",
-        "pdf": "https://arxiv.org/pdf/2607.15579v1"
+        "abstract": "https://arxiv.org/abs/2607.15579v2",
+        "pdf": "https://arxiv.org/pdf/2607.15579v2"
       },
       "primary_category": "humanoid",
       "categories": [
@@ -2990,8 +3737,8 @@
       ]
     },
     {
-      "id": "2607.14852v1",
-      "title": "Towards Human-like Physical Intelligence: LifelongVision-Language-Action Learning for Robotic Manipulation",
+      "id": "2607.14852v2",
+      "title": "Towards Human-like Physical Intelligence: Lifelong Vision-Language-Action Learning for Robotic Manipulation",
       "abstract": "Similar to the natural capabilities of humans to sequentially learn new tasks, robots with Vision-Language-Action (VLA) models should possess lifelong learning ability to learn a new task when deployed in open-world environments. However, most recently proposed lifelong learning models aim to effectively learn the current task (plasticity) or maintain high accuracy on previous tasks (stability), while the plasticity-stability trade-off remains largely unsolved in robotic manipulation models. To address this fundamental challenge, we propose a cache-efficient lifelong Vision-Language-Action learning framework for robotic manipulation (i.e., LifelongVLA), which alleviates the plasticity-stability trade-off with a dual-timescale adaptation mechanism while achieving low-cost robotic deployment with a cache-efficient replay strategy. More concretely, we propose a dual-timescale LoRA gating module to decompose VLA adaptation into two lightweight pathways: a short-term adapter for plasticity and a long-term adapter for stable consolidation. These pathways are integrated via a task-aware gate, enabling explicit control of the plasticity-stability trade-off. In the skill replay phase, a cache-efficient stochastic replay strategy is proposed to preserve more balanced retention signals without full-trajectory storage. Finally, experiments show that LifelongVLA outperforms existing baselines, demonstrating efficient skill expansion, robust retention of learned manipulation behaviors, and reduced reliance on retraining for real-world deployment on an xArm robot.",
       "authors": [
         "Yao He",
@@ -3001,7 +3748,7 @@
         "Yang Cong"
       ],
       "published": "2026-07-16T11:22:06Z",
-      "updated": "2026-07-16T11:22:06Z",
+      "updated": "2026-07-21T06:49:06Z",
       "arxiv_categories": [
         "cs.RO"
       ],
@@ -3010,8 +3757,8 @@
         "vla"
       ],
       "links": {
-        "abstract": "https://arxiv.org/abs/2607.14852v1",
-        "pdf": "https://arxiv.org/pdf/2607.14852v1"
+        "abstract": "https://arxiv.org/abs/2607.14852v2",
+        "pdf": "https://arxiv.org/pdf/2607.14852v2"
       },
       "primary_category": "vla",
       "categories": [
@@ -3602,56 +4349,6 @@
       ]
     },
     {
-      "id": "2607.14341v1",
-      "title": "Beyond Visual Grasping: Benchmarking Complex Grasping from Detection to Execution",
-      "abstract": "Robust robotic grasping remains a fundamental challenge for complex real-world applications. Recent advances in large-scale models demonstrate promising capabilities for reasoning in robotic tasks. However, existing benchmarks for grasping primarily focus on isolated, visual-based grasp pose detection, failing to capture the complexity of grasping tasks that require multi-step reasoning and semantic understanding during execution. To address this gap, we propose GCA-Bench, a benchmark featuring challenging \\textit{grasping with complex action} scenarios that involve both scene-level reasoning and semantic constraints. GCA-Bench enables the evaluation of recent large foundation models under the same settings. To demonstrate the effectiveness of our new benchmark, we implement a diverse set of baselines, ranging from traditional grasp detection pipelines to end-to-end learning methods. Empirical studies achieve success rates below 70\\% on complex grasping scenarios, underscoring critical limitations. In addition, we propose new evaluation metrics, analyze critical failure models, and provide insights to guide the development of more robust and generalizable grasping strategies.",
-      "authors": [
-        "Hanyi Zhang",
-        "Khang Nguyen",
-        "Charith Munasinghe",
-        "Basu Hela",
-        "Tianyu Li",
-        "Zihong Luo",
-        "Hoan Nguyen",
-        "Hans Wernher van de Venn",
-        "Yalin Zheng",
-        "Ravi Prakash",
-        "Tung D. Ta",
-        "Anh Nguyen",
-        "Baoru Huang"
-      ],
-      "published": "2026-07-15T20:10:09Z",
-      "updated": "2026-07-15T20:10:09Z",
-      "arxiv_categories": [
-        "cs.RO",
-        "cs.AI"
-      ],
-      "source_categories": [
-        "manipulation"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.14341v1",
-        "pdf": "https://arxiv.org/pdf/2607.14341v1"
-      },
-      "primary_category": "manipulation",
-      "categories": [
-        "Manipulation",
-        "Vision-Language-Action"
-      ],
-      "category_keys": [
-        "manipulation",
-        "vla"
-      ],
-      "category_color": "#e56f3d",
-      "keywords": [
-        "grasping",
-        "foundation model",
-        "benchmark",
-        "cs.RO",
-        "cs.AI"
-      ]
-    },
-    {
       "id": "2607.14280v1",
       "title": "DiMaS: Distribution Matching for Steering Vision-Language-Action Models",
       "abstract": "Flow-matching-based vision-language-action (VLA) models have emerged as powerful policies for robotic manipulation, yet a critical capability remains underexplored: fine-grained behavioral control, the ability to govern how a robot performs a task by intervening on its internal representations. Representation steering is a well-established interpretability tool for language and vision-language models, where behavioral features are typically encoded as linear directions, but we show that these classic methods fall short in VLAs. We propose DiMaS, a Distribution-Matching Steering strategy tailored to flow-matching VLAs, which transports between representation distributions rather than shifting along a fixed direction, and show that it effectively controls behavior across two state-of-the-art VLAs. We further examine the generalizability of this strategy as the tasks it is learned from and evaluated on grow increasingly dissimilar, characterizing where behavioral control transfers and where it weakens. Finally, through an analysis of the representation structure of the action expert, we explain why classical linear steering falls short in the visuomotor setting: behavioral features are linearly decodable but not linearly steerable, which motivates the distribution-matching design of DiMaS. Our code is publicly available at https://github.com/pegah-kh/dimas, with additional results and videos at https://pegah-kh.github.io/dimas/",
@@ -3668,7 +4365,6 @@
         "cs.LG"
       ],
       "source_categories": [
-        "manipulation",
         "vla"
       ],
       "links": {
@@ -3719,7 +4415,6 @@
         "cs.LG"
       ],
       "source_categories": [
-        "manipulation",
         "vla"
       ],
       "links": {
@@ -3873,7 +4568,7 @@
       ]
     },
     {
-      "id": "2607.13830v1",
+      "id": "2607.13830v2",
       "title": "Recursive ArUco Markers: A Scalable Fiducial Marker Design for Unmanned Aerial Vehicle Landing Pads",
       "abstract": "Unmanned Aerial Vehicles (UAVs) increasingly rely on visual fiducial markers for autonomous navigation and precision landing. However, standard markers suffer from limited operational ranges, becoming undetectable when the camera is either too far or too close. While recursive and fractal markers have been proposed to address this issue, existing approaches either require the marker's center to remain visible, making them vulnerable to occlusion, or are limited in their recursion depth and placement. We propose a novel Recursive ArUco marker design. Our method allows any standard fiducial marker to be transformed into a recursive marker with an arbitrary depth. By employing a modified bit-sampling strategy during detection, we embed complete markers within both the black and white bits of the parent marker. This approach guarantees unlimited recursion depth and robust detection even with partial occlusion, as it does not rely on the marker's center being visible. Furthermore, by maintaining a single, unique identifier across all recursive scales, our proposal provides an extensive dictionary of multiple unique landing pads. This capability allows fleets of UAVs to operate simultaneously, with each drone landing at its designated location -- a feature not supported by existing Fractal and Harco markers due to their structural and dictionary constraints.",
       "authors": [
@@ -3882,7 +4577,7 @@
         "Sergio Garrido-Jurado"
       ],
       "published": "2026-07-15T13:42:04Z",
-      "updated": "2026-07-15T13:42:04Z",
+      "updated": "2026-07-21T09:48:50Z",
       "arxiv_categories": [
         "cs.RO",
         "cs.CV"
@@ -3891,8 +4586,8 @@
         "uav"
       ],
       "links": {
-        "abstract": "https://arxiv.org/abs/2607.13830v1",
-        "pdf": "https://arxiv.org/pdf/2607.13830v1"
+        "abstract": "https://arxiv.org/abs/2607.13830v2",
+        "pdf": "https://arxiv.org/pdf/2607.13830v2"
       },
       "primary_category": "uav",
       "categories": [
@@ -4807,45 +5502,6 @@
       ]
     },
     {
-      "id": "2607.12275v1",
-      "title": "Flatness-Preserving Residual Learning for Real-Time Tight Quadrotor Formation Flight",
-      "abstract": "Quadrotors flying in tight formations are severely affected by turbulent aerodynamic interactions, such as downwash, that can cause catastrophic collisions if left unmodeled. To compensate for these effects, we propose a physics-informed residual dynamics learning framework that captures complex aerodynamic interactions while ensuring the joint multi-quadrotor system remains differentially flat. We leverage this preserved flatness to design a computationally efficient feedback linearization controller that is easily tunable with linear control techniques and cancels aerodynamic disturbances via feedforward compensation. Hardware experiments demonstrate our framework reduces average tracking errors by 31% compared to nominal baselines. Crucially, our lightweight approach matches the tracking performance of state-of-the-art nonlinear model predictive control (NMPC) while requiring an order of magnitude less computation. We are the first to show that stable, tight formation flight can be achieved with under 30 seconds of training data and a 5ms loop rate, unlocking high-fidelity aerodynamic compensation for compute-constrained flight stacks.",
-      "authors": [
-        "Pei-An Hsieh",
-        "Fengjun Yang",
-        "Nikolai Matni",
-        "M. Ani Hsieh"
-      ],
-      "published": "2026-07-14T02:25:04Z",
-      "updated": "2026-07-14T02:25:04Z",
-      "arxiv_categories": [
-        "cs.RO",
-        "eess.SY"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.12275v1",
-        "pdf": "https://arxiv.org/pdf/2607.12275v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "quadrotor",
-        "flight",
-        "control",
-        "cs.RO",
-        "eess.SY"
-      ]
-    },
-    {
       "id": "2607.16299v1",
       "title": "Algorithmic Accuracy as a Motivational Driver in Robot-Mediated Learning: A Comparative Study of Cross-Correlation and CNN-Based Sound Detection in an Interactive Quiz Game",
       "abstract": "In competitive learning activities, inaccurate robot decisions may reduce students' perceptions of fairness and competence, ultimately affecting their motivation. This paper investigates whether the accuracy of sound detection algorithms influences student motivation during a robot-mediated quiz game. A Pepper humanoid robot hosted an interactive buzzer-based quiz in which two sound detection approaches, a Convolutional Neural Network (CNN) and a Cross-Correlation algorithm, were evaluated using a controlled between-subjects experiment involving 40 university students. Participants were equally assigned to a CNN group (n = 20) and a Cross-Correlation group (n = 20). Both groups completed the same quiz under identical conditions, differing only in the sound detection algorithm used for first-responder identification. Student motivation was assessed using the Intrinsic Motivation Inventory (IMI), while algorithm performance was evaluated through real-time detection accuracy. The results indicate that the Cross-Correlation approach achieved more reliable sound detection under classroom conditions and produced significantly higher scores across all IMI subscales, demonstrating greater student interest, perceived competence, effort, perceived choice, and lower perceived pressure (after reverse coding). These findings provide empirical support for the proposed Algorithmic Precision-Motivation Relationship (APMR) model, demonstrating that algorithmic accuracy is not merely an engineering performance metric but an important factor influencing learner motivation in robot-assisted educational environments.",
@@ -4974,82 +5630,6 @@
       ]
     },
     {
-      "id": "2607.11785v1",
-      "title": "MIRA: A Modular Open-Source Micro-UAV for Indoor Research",
-      "abstract": "Indoor robotics research increasingly relies on micro-UAVs whose airframe, electronics, and control software are fully open to modification. Off-the-shelf platforms rarely expose the low-level access required for such modifications, while building a custom alternative typically requires substantial engineering effort before flight testing can begin, leaving many laboratories to work within constraints that limit the scope of their research. We present MIRA (Modular Indoor Research Architecture), a low-cost, open-source micro-UAV for indoor research built around a replicable 3D-printed PLA airframe and a containerized low-level software package managing the companion-to-autopilot communication bridge via Micro XRCE-DDS. Designed as a white-box architecture, core subsystems are individually replaceable without firmware refactoring, supporting local fabrication and component substitution from existing lab inventory. We characterize MIRA through manual flight in position-control mode within an optical motion-capture volume, where the communication pipeline sustains a median companion-to-autopilot latency of 0.02 ms and power spectral density analysis confirms the structural vibration energy stays concentrated in a narrow 90 to 110 Hz band, isolated from the sub-20 Hz control bandwidth and within the autopilot safety thresholds.",
-      "authors": [
-        "Lucas K. de Oliveira",
-        "Felipe A. G. Tommaselli",
-        "João Aires Marsicano",
-        "Marco S. Tayar",
-        "Pedro A. R. Saraiva",
-        "Ricardo V. Godoy",
-        "Marcelo Becker"
-      ],
-      "published": "2026-07-13T16:37:07Z",
-      "updated": "2026-07-13T16:37:07Z",
-      "arxiv_categories": [
-        "cs.RO",
-        "eess.SY"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11785v1",
-        "pdf": "https://arxiv.org/pdf/2607.11785v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "flight",
-        "control",
-        "cs.RO",
-        "eess.SY"
-      ]
-    },
-    {
-      "id": "2607.11724v1",
-      "title": "High-level spatial Dubins airplane-based reference smoothing with low-level geometric tracking for quadrotor control",
-      "abstract": "A method for the control of quadrotors is presented. It is composed of a high-level reference smoothing step and a low-level reference tracking step. The high-level step leverages the Dubins airplane model for dimensionality reduction and reduced computational complexity, and exploits its structure for decoupling, spatial modeling and the formulation of a small linear program. The low-level step leverages a geometric tracking controller, which is based on the full quadrotor model. The method is designed for the tracking of references subject to lateral constraints along the path. An example is the tracking of references along obstacle contours. It is differentiated between two different setups. Either the high-level planning step is conducted once and offline, or, alternatively, the high-level planning step is conducted recedingly online in closed-loop over a limited spatial prediction horizon.",
-      "authors": [
-        "Mogens Plessen"
-      ],
-      "published": "2026-07-13T15:49:26Z",
-      "updated": "2026-07-13T15:49:26Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11724v1",
-        "pdf": "https://arxiv.org/pdf/2607.11724v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "quadrotor",
-        "planning",
-        "control",
-        "cs.RO"
-      ]
-    },
-    {
       "id": "2607.11690v1",
       "title": "Requirement-Driven Design of Whole-Body Social Tactile Sensing via Virtual Human-Robot Interaction",
       "abstract": "Tactile sensing for social-physical human-robot interaction (spHRI) is designed in a hardware-driven manner, where predefined sensor configurations constrain coverage, spatial resolution, and the range of recognizable gestures. We propose a requirement-driven framework that derives sensing requirements, specifically spatial resolution and placement, directly from interaction data. Using a VR-based platform with haptic feedback, we collected high-resolution whole-body contact distributions across multiple social scenarios, from which we identified nine recurring social touch gestures. Eight gestures were selected for controlled data collection with 18 participants, yielding an open-source dataset of 5,520 trials. Analysis of contact distributions and simulated tactile encodings provides quantitative baselines for skin coverage and sensor density on a humanoid robot platform. While demonstrated on a single robot platform, the methodology is designed to be transferable to other robot morphologies, potentially enabling morphology-specific sensing requirements to be derived prior to hardware fabrication.",
@@ -5132,83 +5712,6 @@
         "dataset",
         "cs.RO",
         "cs.AI"
-      ]
-    },
-    {
-      "id": "2607.11654v1",
-      "title": "A Model for Mediating Multi-Modal Human Intent into Safe Maneuvers for UAVs",
-      "abstract": "Direct human interaction with autonomous UAV systems can be enabled through modalities such as speech, gestures, and graphical interfaces. However, interpreting such inputs as directly executable commands introduces safety risks in dynamic environments. Operator requests may conflict with terrain constraints, inter-UAV separation requirements, or flight-envelope limitations. In this paper, we present a requirements-governed maneuver-response model that mediates multi-modal human intent into safe UAV maneuvers by treating operator inputs as bounded maneuver requests rather than direct commands. Requested maneuvers are mapped to constrained motion primitives and processed through a structured request-evaluate-execute pipeline. Each request is interpreted with associated confidence, validated against terrain, separation, workspace, and flight-envelope constraints, and either constrained, rejected, or executed under continuous runtime monitoring. We further formalize the approach as a requirements-based specification model in which maneuver primitives are associated with explicit preconditions, invariants, guard conditions, and postconditions governing admissibility, execution safety, and emergency handling. These requirements support runtime verification and future reactive synthesis approaches. We present an initial lab-based validation demonstrating that voice and GUI-based inputs can be reliably interpreted and safely executed as constrained maneuver requests.",
-      "authors": [
-        "Sofia Nelson",
-        "Dalal Alrajeh",
-        "Pedro Antonio Alarcon Granadeno",
-        "Jane Cleland-Huang"
-      ],
-      "published": "2026-07-13T15:04:57Z",
-      "updated": "2026-07-13T15:04:57Z",
-      "arxiv_categories": [
-        "cs.RO",
-        "cs.SE"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11654v1",
-        "pdf": "https://arxiv.org/pdf/2607.11654v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "flight",
-        "cs.RO",
-        "cs.SE"
-      ]
-    },
-    {
-      "id": "2607.11651v1",
-      "title": "Coordinated Incremental Trajectory Tracking of a Tailsitter Drone",
-      "abstract": "This paper derives an analytical differential flatness transform for a tailsitter Unmanned Aerial Vehicle (UAV) under coordinated flight conditions using a simplified aerodynamic model. The proposed framework is formulated exclusively using rotation matrices, avoiding the ambiguities inherent to Euler angle representations. The method extends the applicability of an existing state-of-the-art differential flatness-based controller to flight regimes involving a significant vertical velocity component, where the previous approach becomes inapplicable. The proposed framework is validated experimentally with trajectories that highlight its advantages in these regimes.",
-      "authors": [
-        "Evangelos Ntouros",
-        "Ewoud J. J. Smeur"
-      ],
-      "published": "2026-07-13T15:03:44Z",
-      "updated": "2026-07-13T15:03:44Z",
-      "arxiv_categories": [
-        "cs.RO",
-        "eess.SY"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11651v1",
-        "pdf": "https://arxiv.org/pdf/2607.11651v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "drone",
-        "aerial",
-        "flight",
-        "control",
-        "cs.RO",
-        "eess.SY"
       ]
     },
     {
@@ -5356,74 +5859,31 @@
         "math.OC"
       ],
       "source_categories": [
-        "humanoid",
-        "uav"
+        "humanoid"
       ],
       "links": {
         "abstract": "https://arxiv.org/abs/2607.11603v1",
         "pdf": "https://arxiv.org/pdf/2607.11603v1"
       },
-      "primary_category": "uav",
+      "primary_category": "humanoid",
       "categories": [
-        "UAV",
-        "Humanoid"
+        "Humanoid",
+        "UAV"
       ],
       "category_keys": [
-        "uav",
-        "humanoid"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "quadrotor",
         "humanoid",
+        "uav"
+      ],
+      "category_color": "#8e5a2f",
+      "keywords": [
+        "humanoid",
+        "quadrotor",
         "control",
         "dataset",
         "benchmark",
         "cs.RO",
         "eess.SY",
         "math.OC"
-      ]
-    },
-    {
-      "id": "2607.11529v1",
-      "title": "Parse, Search, and Confirmation: Training-Free Aerial Vision-and-Dialog Navigation with Chain-of-Thought Reasoning and Structured Spatial Memory",
-      "abstract": "In this paper, we tackle the Aerial Vision-and-Dialog Navigation (AVDN) task in the training-free setting for resource-efficient high-altitude UAV navigation.Naively applying MLLMs leads to unreliable navigation due to weak directional grounding and the lack of explicit spatial memory.To address these issues, we propose PSC-AVDN, a training-free framework that tightly couples a three-stage Parsing-Search-Confirmation reasoning pipeline with a Structured Spatial Memory (SSM).The parsing stage uses an LLM to convert ambiguous dialogue instructions into stable geometric directional and destination cues.A Search Chain-of-Thought (S-CoT) then performs stepwise target exploration under high-altitude observations, and a Confirmation Chain-of-Thought (C-CoT) conducts fine-grained verification around candidate regions to resolve visual ambiguity.Meanwhile, SSM integrates three complementary sources of spatial cues, including multi-scale visual observation, spatial visual memory, and structured geometric memory to provide global spatial context and long-horizon consistency.Extensive experiments on ANDH and ANDH-Full show that PSC-AVDN establishes new state-of-the-art performance in the training-free setting, matching or surpassing several finetuned methods.Code will be publicly available at: https://github.com/QY6616/PSC-AVDN",
-      "authors": [
-        "Yu Qi",
-        "Hongyu Li",
-        "Shaofei Huang",
-        "Tianrui Hui",
-        "Yaxiong Wang",
-        "Lechao Cheng",
-        "Zhun Zhong",
-        "Si Liu",
-        "Meng Wang"
-      ],
-      "published": "2026-07-13T13:14:20Z",
-      "updated": "2026-07-13T13:14:20Z",
-      "arxiv_categories": [
-        "cs.CV"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11529v1",
-        "pdf": "https://arxiv.org/pdf/2607.11529v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "aerial",
-        "navigation",
-        "cs.CV"
       ]
     },
     {
@@ -5465,126 +5925,6 @@
         "dataset",
         "cs.RO",
         "cs.AI"
-      ]
-    },
-    {
-      "id": "2607.11386v1",
-      "title": "From Sketch Prior to Trajectories: A Mission-Oriented Coordinated Navigation Framework for Indoor UAV Swarm",
-      "abstract": "UAV swarm for applications, such as indoor inspection, security patrol, and logistics delivery, are often mission-oriented rather than exploration-oriented. In these tasks, UAVs are required to visit task-relevant regions in a prescribed sequence, and such region-level mission information can often be obtained from pre-deployment sketch-map priors, such as floor plans, CAD layouts, or evacuation diagrams. Although these tasks are executed in three-dimensional space, UAVs usually fly within a specific altitude layer or a nearly fixed altitude range on each floor, making mission-level region transitions mainly governed by planar connectivity. Based on these observations, this paper proposes a mission-oriented coordinated navigation framework that exploits sketch-map priors for multi-UAV indoor operations. Onboard observations are used to perform topological alignment, and the aligned prior is fused with online observations to construct a mission-oriented traversability representation. A layered 2D--3D coordinated navigation framework is further developed, where 2D guided path planning generates mission-oriented guide paths and guide-driven 3D trajectory optimization produces dynamically feasible and collision-free trajectories. Simulation and real-world experiments validate the effectiveness of the proposed framework in structured multi-room indoor environments and further demonstrate its coordinated navigation capability under both communication-available and communication-loss conditions. Multi-floor simulation results show the scalability of the system to layered indoor structures.",
-      "authors": [
-        "Xinhang Xu",
-        "Ruiyang Liu",
-        "Haotian Jin",
-        "Yi Wang",
-        "Hongming Shen",
-        "Jianping Li",
-        "Lihua Xie"
-      ],
-      "published": "2026-07-13T10:47:14Z",
-      "updated": "2026-07-13T10:47:14Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11386v1",
-        "pdf": "https://arxiv.org/pdf/2607.11386v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "navigation",
-        "swarm",
-        "planning",
-        "cs.RO"
-      ]
-    },
-    {
-      "id": "2607.11366v1",
-      "title": "Self-supervised training for high-resolution close-range multispectral remote sensing imagery",
-      "abstract": "Although self-supervised learning (SSL) offers a promising way to reduce annotation effort in close-range remote sensing, its effectiveness for high-resolution multispectral unmanned aerial vehicle (UAV) imagery remains underexplored due to limited data. This study evaluated SSL pretraining for precision agriculture using cm-scale multispectral drone imagery collected across multiple sensors, years, and regions. Transformer-based encoders were pretrained with Momentum Contrast v3 (MoCo-v3) and Masked Autoencoders on a harmonized dataset combining msuav500K with newly collected multi-year UAV imagery from agricultural fields in Finland. Pretraining used four spectral bands (Green, Red, Red-Edge, Near-Infrared) for cross-sensor compatibility. The models were evaluated on crop-weed semantic segmentation using the WeedMap dataset with 5--100% training data. The following two subsets served as downstream tasks: Task A (Germany, RedEdge-M), where all pretrained models were compared under partial and full fine-tuning, and Task B (Switzerland, Sequoia), where the best encoder from Task A was assessed. Our Swin Transformer pretrained with MoCo-v3 achieved the strongest performance on both tasks, surpassing the Swin Transformer model of Doornbos et al. pretrained on a pre-release of msuav500K. Our pretrained Swin Transformer further demonstrated cross-sensor and cross-region generalization. We additionally provide a public multi-year multispectral UAV dataset from Finland to support future research.",
-      "authors": [
-        "Leon-Friedrich Thomas",
-        "Mikael Änäkkälä",
-        "Antti Lajunen"
-      ],
-      "published": "2026-07-13T10:31:35Z",
-      "updated": "2026-07-13T10:31:35Z",
-      "arxiv_categories": [
-        "cs.CV"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11366v1",
-        "pdf": "https://arxiv.org/pdf/2607.11366v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "drone",
-        "aerial",
-        "transformer",
-        "dataset",
-        "cs.CV"
-      ]
-    },
-    {
-      "id": "2607.11303v1",
-      "title": "ASUMOT: Motion-Consistency-Based Asynchronous UAV Detection and Tracking with Event Cameras",
-      "abstract": "Event cameras offer microsecond-level temporal resolution and high dynamic range for low-altitude UAV perception. However, long-range UAVs often produce sparse, fragmented, and noise-contaminated event responses, where one semantic target may appear as multiple spatially separated blobs. Direct blob-level asynchronous tracking therefore suffers from duplicate trajectories and unstable identities. We propose ASUMOT, a motion-consistency-based asynchronous UAV detection and tracking framework operating directly on raw events. ASUMOT models each UAV as a set of motion-consistent event blobs. A local motion-consistency estimator triggers reliable candidates, a lightweight multi-task verifier provides UAV confidence and motion-direction cues, and motion-consistency clustering aggregates fragmented blobs into identity-consistent UAV tracks. We also introduce ES-UAV, a high-definition event-level UAV benchmark with dense semantic annotations. Experiments on public UAV tracking data and ES-UAV show that ASUMOT improves the accuracy--efficiency trade-off while preserving asynchronous event processing. Code and Dataset will be released.",
-      "authors": [
-        "Baofeng Jia",
-        "Xiaoyu Chen",
-        "Jingyuan Zhang",
-        "Zongze Wu",
-        "Haochen li",
-        "Jing Han",
-        "Lianfa Bai"
-      ],
-      "published": "2026-07-13T09:19:41Z",
-      "updated": "2026-07-13T09:19:41Z",
-      "arxiv_categories": [
-        "cs.CV"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11303v1",
-        "pdf": "https://arxiv.org/pdf/2607.11303v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "perception",
-        "dataset",
-        "benchmark",
-        "cs.CV"
       ]
     },
     {
@@ -5678,342 +6018,6 @@
         "control",
         "cs.RO",
         "cs.AI"
-      ]
-    },
-    {
-      "id": "2607.11041v1",
-      "title": "PAKE: Learning Whole-Body Loco-Manipulation with Partial Kinematic Embeddings",
-      "abstract": "Loco-manipulation has recently shown promising capabilities; however, achieving high-precision control, managing the high-dimensional action space induced by many degrees of freedom (DoFs), and fully exploiting the inherent redundancy of whole-body systems remain challenging. In this paper, we propose a novel whole-body control framework that effectively addresses these challenges by decomposing the complex loco-manipulation problem into partial reference motion generation and low-level imitation control. We introduce a new Kinematic Normalizing Flow (KNF) model, trained on a large-scale kinematic dataset, that generates diverse yet feasible partial reference motions. A high-level controller is then trained to navigate the KNF's latent space to exploit redundant solutions, while a low-level controller ensures physically feasible and accurate motion execution. We validate our approach on the quadrupedal robot equipped with a six-DoF robotic arm. In simulation, experimental results show that our approach significantly outperforms state-of-the-art methods in terms of tracking accuracy and feasible workspace coverage. For hardware deployment, we evaluate the system over 24 episodes across 8 different mobile loco-manipulation tasks. The system achieves end-effector pose-tracking errors of 4.5 cm and 0.14 rad, while maintaining accurate locomotion tracking with linear and angular velocity errors of 0.1 m/s and 0.01 rad/s, respectively, outperforming competitive baselines. Our method represents a practical and powerful solution for accurate and generalized whole-body loco-manipulation in high-DoF robotic systems, with promising potential for diverse downstream robotic tasks.",
-      "authors": [
-        "Zhengmao He",
-        "Moonkyu Jung",
-        "Hyeongjun Kim",
-        "Jiseong Lee",
-        "Hui Zhang",
-        "Jemin Hwangbo",
-        "Jie Song"
-      ],
-      "published": "2026-07-13T03:12:09Z",
-      "updated": "2026-07-13T03:12:09Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "humanoid"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.11041v1",
-        "pdf": "https://arxiv.org/pdf/2607.11041v1"
-      },
-      "primary_category": "humanoid",
-      "categories": [
-        "Humanoid",
-        "Manipulation"
-      ],
-      "category_keys": [
-        "humanoid",
-        "manipulation"
-      ],
-      "category_color": "#8e5a2f",
-      "keywords": [
-        "whole-body",
-        "locomotion",
-        "manipulation",
-        "control",
-        "dataset",
-        "cs.RO"
-      ]
-    },
-    {
-      "id": "2607.10933v1",
-      "title": "Rigidity-Based Multi-UAV Trajectory Optimization for Rapid Cooperative Emergency Target Localization",
-      "abstract": "Reducing the response time for accurate emergency-caller localization is critical in vehicular and public-safety networks. Although mobile devices commonly use GNSS, Wi-Fi, or cellular positioning, their accuracy and availability can degrade because of poor signal reception, limited infrastructure, and regulatory constraints. UAV-based localization offers a promising alternative by using airborne sensors to cooperatively estimate the target position. However, existing Fisher information matrix (FIM)-based trajectory optimization methods depend on the current target estimate and can perform poorly in the early mission stage, when measurements are limited and uncertainty is high. We propose a rigidity-based UAV trajectory optimization method that maximizes the smallest nonzero singular value of the rigidity matrix associated with the UAV-target sensing graph, improving geometric conditioning and reducing position ambiguity. We also introduce a pruning-based matrix reduction strategy for efficient real-time implementation. Simulations show that the proposed method reduces search time by 32.9% compared with FIM-based methods and satisfies the FCC horizontal emergency-localization requirement sooner. Further results demonstrate scalability, robustness to UAV positioning errors and NLOS path loss, low sensitivity to heading parameters, practical computation and communication costs, and more stable degradation than PPO-based baselines under severe sensing and navigation perturbations.",
-      "authors": [
-        "Halim Lee",
-        "Jiwon Seo"
-      ],
-      "published": "2026-07-12T21:46:28Z",
-      "updated": "2026-07-12T21:46:28Z",
-      "arxiv_categories": [
-        "eess.SY"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10933v1",
-        "pdf": "https://doi.org/10.1109/TVT.2026.3713188"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "navigation",
-        "eess.SY"
-      ]
-    },
-    {
-      "id": "2607.10815v1",
-      "title": "Learning Roller-Skating Motions of Humanoid Robots Based on Adversarial Motion Priors",
-      "abstract": "Humanoid roller-skating is difficult because the robot must coordinate whole-body balance, rolling contacts, and velocity-dependent posture regulation. This paper presents an adversarial motion prior based reinforcement learning framework for two humanoid roller-skating gaits: Pump Glide skating and Push Glide skating. The two gait datasets are collected independently through motion capture and retargeted to the humanoid robot separately. The retargeted data are then smoothed and resampled into reference motion states for AMP training. The two gaits are learned by independent AMP training pipelines with separate reference datasets, separate policies, and independent reward architectures. Simulation experiments are designed to evaluate gait quality, velocity tracking, turning, and gait-specific reward ablations.",
-      "authors": [
-        "Yunkang Cheng",
-        "Yutong Wu",
-        "Menghan Li",
-        "Shihe Zhou",
-        "Mingguo Zhao"
-      ],
-      "published": "2026-07-12T16:05:56Z",
-      "updated": "2026-07-12T16:05:56Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "humanoid"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10815v1",
-        "pdf": "https://arxiv.org/pdf/2607.10815v1"
-      },
-      "primary_category": "humanoid",
-      "categories": [
-        "Humanoid"
-      ],
-      "category_keys": [
-        "humanoid"
-      ],
-      "category_color": "#8e5a2f",
-      "keywords": [
-        "humanoid",
-        "whole-body",
-        "gait",
-        "balance",
-        "reinforcement learning",
-        "dataset",
-        "cs.RO"
-      ]
-    },
-    {
-      "id": "2607.10655v1",
-      "title": "Artificial Foveated Perception for Mitigating Shortcut Learning in Robotic Foundation Models",
-      "abstract": "Robotic foundation models have recently made substantial progress in multi-task capability, cross-embodiment transfer, and language-conditioned control. Yet robust deployment across diverse real-world settings remains difficult, in part because policies often fail to distinguish causally relevant visual structure from spurious scene-level correlations. We identify this failure mode as shortcut learning: the tendency to exploit predictive but non-causal correlations in the training distribution rather than the task-relevant visual evidence that determines successful action. Although shortcut learning has been extensively studied in computer vision and broader machine learning, its role in robotic foundation models remains comparatively underexplored. We propose Artificial Foveated Perception (AFP), a lightweight, policy-agnostic module that takes the same vision and language inputs as Vision-Language-Action and World Action Model pipelines and predicts task-conditioned masks over relevant objects, the robot, and other action-critical regions. We use these masks primarily as an auxiliary grounding signal during fine-tuning, aligning policy attention with task-relevant regions while leaving the core architecture unchanged. After fine-tuning, the policy executes on the original observation stream without requiring AFP in the control loop. We evaluate AFP across state-of-the-art robotic foundation models and show that foveated perception reduces fine-tuning time, suppresses overfitting, and improves generalization under environmental perturbations. Ablations over mask quality and grounding-loss design further show that these gains arise from directing policy learning toward task-relevant visual evidence. These results suggest that task-conditioned foveated perception is a practical mechanism for making robotic foundation models more robust, data-efficient, and scalable.",
-      "authors": [
-        "Xiatao Sun",
-        "Yuan Zhuang",
-        "Mateo Sanchez Lopez Negrete",
-        "Matei-Victor Coldea",
-        "Chen Liang",
-        "Haoyang Zhang",
-        "Che Liu",
-        "Ziyao Zeng",
-        "Shawn Li",
-        "Qian Wang",
-        "Fei Miao",
-        "Daniel Rakita"
-      ],
-      "published": "2026-07-12T08:42:36Z",
-      "updated": "2026-07-12T08:42:36Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "vla"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10655v1",
-        "pdf": "https://arxiv.org/pdf/2607.10655v1"
-      },
-      "primary_category": "vla",
-      "categories": [
-        "Vision-Language-Action"
-      ],
-      "category_keys": [
-        "vla"
-      ],
-      "category_color": "#256d85",
-      "keywords": [
-        "vision-language-action",
-        "language-conditioned",
-        "foundation model",
-        "control",
-        "perception",
-        "cs.RO"
-      ]
-    },
-    {
-      "id": "2607.10605v1",
-      "title": "End-to-End Real-Time Drone-Based Person Detection Framework Using Deep Learning",
-      "abstract": "In recent years, Unmanned Aerial Vehicles (UAVs) or drones have gained rapid response in terms of security, search and rescue (SAR), border surveillance, etc. Existing monitoring frameworks often struggle to maintain detection consistency when targets undergo significant scale variations due to altitude changes, leading to critical information gaps. To address this issue, this work proposes an integrated real-time detection pipeline for detecting targets through the wireless live drone video feed. Build upon YOLOv8-nano architecture, extensive flight experiments were conducted to determine the detection performance across multiple flight altitudes. Trained on VisDrone2019 dataset, the results of YOLOv8-nano model achieves 57.4%, 41%, 44.8% and 20.3% in precision, recall, mAP and mAP50:95 respectively. While demonstrating on real environment, this analysis revealed that the algorithm achieves near-total detection reliability at altitudes between 16 and 25 meters with the detection frame rate consistently maintained above 41 FPS and reaching a peak of 50 FPS. However, the goal of this work is to enable real-time person detection from an aerial platform via wireless transmission. This approach effectively addresses the dual challenges of identifying targets at varying scales and ensuring near-to-accurate localization during aerial observation.",
-      "authors": [
-        "Payel Sarmah",
-        "Ayush Ranjan",
-        "Piyush Kaushik Bhattacharyya",
-        "Anil Kr. Shaw",
-        "Pradip Kr. Das"
-      ],
-      "published": "2026-07-12T06:55:26Z",
-      "updated": "2026-07-12T06:55:26Z",
-      "arxiv_categories": [
-        "cs.CV",
-        "cs.LG"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10605v1",
-        "pdf": "https://arxiv.org/pdf/2607.10605v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "drone",
-        "aerial",
-        "flight",
-        "dataset",
-        "cs.CV",
-        "cs.LG"
-      ]
-    },
-    {
-      "id": "2607.10583v1",
-      "title": "Benchmarking UAV-based Vehicle Re-Identification under Simulated Weather Conditions",
-      "abstract": "UAV-based vehicle re-identification (ReID) has emerged as a promising technique for traffic surveillance, urban monitoring, and public-safety applications thanks to the flexible viewpoints and wide-area coverage provided by unmanned aerial vehicles. However, despite recent progress on UAV-based vehicle ReID benchmarks, the robustness of existing methods under adverse weather remains insufficiently studied. This is important because weather degradation can significantly affect the fine-grained appearance cues required for reliable vehicle matching in aerial imagery, especially under small object scale, viewpoint variation, and complex backgrounds. In this paper, we present a controlled comparative study of three representative recent vehicle ReID methods, namely CLIP-ReID, MSINet, and AdaSP, on two UAV-based benchmarks, VRU and UAV-VeID. To ensure consistent robustness evaluation, we generate synthetic foggy and rainy variants of both datasets using an analytical weather-effect pipeline while preserving the original identities and data splits. All methods are then trained and evaluated under matched clean, foggy, and rainy conditions. Experimental results show that adverse weather consistently degrades retrieval performance across both datasets, with rain causing larger drops than fog in nearly all settings. Among the evaluated methods, AdaSP demonstrates the strongest robustness, achieving 93.0% and 88.5% mAP on VRU-Large, and 88.7% and 76.2% mAP on UAV-VeID-Test under foggy and rainy conditions, respectively. Overall, our findings show that simulated adverse weather substantially increases the difficulty of UAV-based vehicle ReID, reveals clear robustness differences among recent methods, and highlights the need for weather-aware model design and evaluation protocols in future aerial ReID research. The code is released at https://github.com/tranminhvu945/Benchmarking-ReID.",
-      "authors": [
-        "Vu Minh Tran",
-        "Khang Nguyen"
-      ],
-      "published": "2026-07-12T05:41:29Z",
-      "updated": "2026-07-12T05:41:29Z",
-      "arxiv_categories": [
-        "cs.CV"
-      ],
-      "source_categories": [
-        "uav"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10583v1",
-        "pdf": "https://arxiv.org/pdf/2607.10583v1"
-      },
-      "primary_category": "uav",
-      "categories": [
-        "UAV"
-      ],
-      "category_keys": [
-        "uav"
-      ],
-      "category_color": "#4f8f3a",
-      "keywords": [
-        "uav",
-        "aerial",
-        "control",
-        "dataset",
-        "benchmark",
-        "cs.CV"
-      ]
-    },
-    {
-      "id": "2607.10504v1",
-      "title": "SUREFlow: State-space Uncertainty-aware REsidual Flow Matching for Robust Robot Manipulation",
-      "abstract": "Generative vision-language-action policies have advanced robot manipulation, but they often exhibit instability under noise, partial observability, and stochastic initial conditions. During extended rollouts, small velocity errors accumulate, degrading execution reliability. Existing diffusion and flow-based policies typically assume homoscedastic residuals and lack explicit uncertainty modeling within action generation, limiting robustness during iterative rollout. We propose SUREFlow, a state-space uncertainty-aware residual flow matching framework built on a Mamba backbone. The method jointly predicts action velocities and input-dependent residual uncertainty, enabling selective refinement of unreliable action dimensions without environment feedback while preserving computational efficiency. On LIBERO, SUREFlow achieves 92.5% average success rate (SR), outperforming the Mamba-based MaIL by 34.2%. On LIBERO-PRO, it attains around 49% SR using only 179M parameters, achieving performance comparable to large VLAs with 3-7B parameters. SUREFlow source code is available on: https://github.com/tanvirnwu/SUREFlow",
-      "authors": [
-        "Md Tanvir Islam",
-        "Sai Navaneet Peddapalli",
-        "Sangmoon Lee",
-        "Sangtae Ahn"
-      ],
-      "published": "2026-07-11T23:25:42Z",
-      "updated": "2026-07-11T23:25:42Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "vla"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10504v1",
-        "pdf": "https://arxiv.org/pdf/2607.10504v1"
-      },
-      "primary_category": "vla",
-      "categories": [
-        "Vision-Language-Action",
-        "Manipulation"
-      ],
-      "category_keys": [
-        "vla",
-        "manipulation"
-      ],
-      "category_color": "#256d85",
-      "keywords": [
-        "vision-language-action",
-        "vla",
-        "manipulation",
-        "cs.RO"
-      ]
-    },
-    {
-      "id": "2607.10180v1",
-      "title": "ActiveFly-Bench: Aligning Embodied Question Answering with Vision-Language-Action for Aerial Embodied Perception",
-      "abstract": "We introduce ActiveFly-Bench, the first benchmark to bridge cyberspace reasoning and physical-world interaction for UAV embodied perception. The benchmark decomposes active perception into three hierarchical tasks: Aerial Embodied Question Answering (Air-EQA), Observation Behavior Planning (OBP), and Fine-grained Language-guided UAV Control (FLUC), explicitly connecting high-level task understanding, behavior planning, and low-level control. The datasets are collected from both real-world and simulated outdoor environments for training and evaluation. We further develop ActiveFly, a closed-loop UAV agent that integrates visual-language reasoning with fine-grained control, and deploy it on a physical UAV platform. Experiments with representative VLMs and VLA models show that current UAV agents still struggle with behavior planning, viewpoint adjustment, and robust task completion in active perception. These results establish ActiveFly-Bench as a new testbed for embodied aerial intelligence.",
-      "authors": [
-        "Weichen Zhang",
-        "Shiquan Yu",
-        "Yinan Zhu",
-        "Peizhi Tang",
-        "Shilong Ji",
-        "Zhiyuan Deng",
-        "Tianyi Lyu",
-        "Haoyang Wang",
-        "Xin Zeng",
-        "Chen Gao",
-        "Yong Li",
-        "Xinlei Chen"
-      ],
-      "published": "2026-07-11T07:58:04Z",
-      "updated": "2026-07-11T07:58:04Z",
-      "arxiv_categories": [
-        "cs.RO",
-        "cs.AI"
-      ],
-      "source_categories": [
-        "vla"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2607.10180v1",
-        "pdf": "https://arxiv.org/pdf/2607.10180v1"
-      },
-      "primary_category": "vla",
-      "categories": [
-        "Vision-Language-Action",
-        "UAV"
-      ],
-      "category_keys": [
-        "vla",
-        "uav"
-      ],
-      "category_color": "#256d85",
-      "keywords": [
-        "vision-language-action",
-        "vla",
-        "uav",
-        "aerial",
-        "planning",
-        "control",
-        "perception",
-        "dataset"
       ]
     }
   ]
