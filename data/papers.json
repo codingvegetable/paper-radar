@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-20T02:10:15Z",
+  "updated_at": "2026-08-21T02:14:03Z",
   "source": "arXiv API",
   "category_labels": {
     "manipulation": "Manipulation",
@@ -8,6 +8,196 @@
     "humanoid": "Humanoid"
   },
   "papers": [
+    {
+      "id": "2608.20114v1",
+      "title": "DECOWAM: Decoupled Whole-Body World-Action Model for Legged Mobile Manipulation",
+      "abstract": "Mobile manipulation requires a robot to predict how locomotion and arm motion jointly alter future observations and control. Existing world-action models, developed largely for fixed-base platforms, do not explicitly distinguish camera ego-motion from base and arm actions. Here we introduce DECOWAM, a whole-body world-action model that separates these factors through dedicated conditional interfaces. DECOWAM freezes an adapted FastWAM backbone and trains residual adapters, an action-equivalent future bottleneck distilled from privileged observations, adversarially separated base and arm latents, and base-velocity conditioning for video prediction. We further introduce ARMDOG, a real-robot dataset that synchronizes video, whole-body state and action, and language. On a fixed replay protocol, DECOWAM improved both future-video and action prediction over FastWAM, reducing action MSE by 21.7% with 25.95M trainable adaptation parameters. Across 79 closed-loop trials per method, it achieved the highest observed whole-body coordination and base-displacement robustness among the compared systems, while task completion remained comparable to the strongest baseline. These results show that embodiment-aware factorization can support parameter-efficient joint visual prediction and whole-body control under moving viewpoints.",
+      "authors": [
+        "Siyuan Ma",
+        "Boshi Zhang",
+        "Yutian Zhang",
+        "Qinglian Wu",
+        "Jiaqi Zhai",
+        "Dong Wei",
+        "Qiaojun Yu"
+      ],
+      "published": "2026-08-20T14:44:11Z",
+      "updated": "2026-08-20T14:44:11Z",
+      "arxiv_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "source_categories": [
+        "humanoid"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2608.20114v1",
+        "pdf": "https://arxiv.org/pdf/2608.20114v1"
+      },
+      "primary_category": "humanoid",
+      "categories": [
+        "Humanoid",
+        "Manipulation"
+      ],
+      "category_keys": [
+        "humanoid",
+        "manipulation"
+      ],
+      "category_color": "#8e5a2f",
+      "keywords": [
+        "whole-body",
+        "locomotion",
+        "legged",
+        "manipulation",
+        "control",
+        "dataset",
+        "cs.AI",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2608.20087v1",
+      "title": "Towards Professional Tennis Styles for Humanoid Robots with Adaptive Motion Planning and Tracking",
+      "abstract": "Humanoid robots have recently demonstrated promising capabilities in real-world ball sports. However, achieving professional motion styles while maintaining strong task performance remains challenging. In this work, we propose AdaPT, an Adaptive Motion Planning and Tracking framework that learns professional tennis serving and rally styles directly from broadcast videos. This hierarchical design is motivated by the key insight that the planner generates stylistic kinematic motions, while the tracker executes them with minimal interference with planning. Despite its effectiveness in simulation, a substantial sim-to-real gap emerges: tracking performance inevitably degrades on real robots, and this degradation is partially overlooked by autoregressive planning and further compounded by noisy perception. To address these issues, our adaptation mechanism improves tracking robustness by learning to track randomized execution speeds, while conditioning the planner on a learned motion-speed adapter to mitigate compounding errors. Real-world experiments on the Unitree G1 demonstrate the effectiveness of our adaptation mechanism in bridging the sim-to-real gap. We further deploy AdaPT policies on the full-size Dobot Atom humanoid robot (1.7m) and demonstrate in-the-wild serving without motion capture. Beyond these results, our real-world experiments reveal both algorithmic and engineering insights for future humanoid ball-sports systems. Videos and code are available on our \\href{https://humanoidtennis.github.io/AdaPT/}{project website}.",
+      "authors": [
+        "Tao Huang",
+        "Ruofei Liu",
+        "Xuchen Tang",
+        "Xinyin Zhang",
+        "Junli Ren",
+        "Huayi Wang",
+        "Feiyu Jia",
+        "Yukai Qi",
+        "Kangning Yin",
+        "Weishuai Zeng",
+        "Lipeng Chen",
+        "Xi Li",
+        "Ting Wu",
+        "Kailin Li",
+        "Ruoli Dai",
+        "Jingbo Wang",
+        "Lei Han",
+        "Jiangmiao Pang"
+      ],
+      "published": "2026-08-20T14:19:36Z",
+      "updated": "2026-08-20T14:19:36Z",
+      "arxiv_categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "source_categories": [
+        "humanoid"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2608.20087v1",
+        "pdf": "https://arxiv.org/pdf/2608.20087v1"
+      },
+      "primary_category": "humanoid",
+      "categories": [
+        "Humanoid"
+      ],
+      "category_keys": [
+        "humanoid"
+      ],
+      "category_color": "#8e5a2f",
+      "keywords": [
+        "humanoid",
+        "sim-to-real",
+        "planning",
+        "perception",
+        "cs.RO",
+        "cs.AI"
+      ]
+    },
+    {
+      "id": "2608.19955v1",
+      "title": "MILD: Tractable Terrain Modeling for Learning Improved Bipedal Locomotion on Deformable Surfaces",
+      "abstract": "Enabling robots to walk on yielding terrain is vital for applications ranging from disaster response to planetary exploration. While bipedal robots hold immense potential, their locomotion on deformable surfaces remains limited as current simulators fail to capture the spatiotemporal heterogeneity of such yielding substrates. We present MILD, featuring a physics-grounded discrete-element contact solver that accurately simulates spatially varying foot-terrain interactions. Complementing this model, we train a terrain-aware locomotion controller via deep reinforcement learning with latent modulation and proprioceptive estimation. Quantitative comparisons against state-of-the-art methods show our approach generates more diverse and realistic contact scenarios during training, resulting in controllers that exhibit natural adaptation on real deformable surfaces. Through hardware experiments, we demonstrate the system's capability for online terrain identification and adaptation across a wide range of surface stiffness.",
+      "authors": [
+        "Zeren Luo",
+        "Jiahui Zhang",
+        "Zhe Xu",
+        "Wanyue Li",
+        "Xinqi Li",
+        "Xuechao Chen",
+        "Zhangguo Yu",
+        "Annan Tang",
+        "Peng Lu"
+      ],
+      "published": "2026-08-20T12:24:34Z",
+      "updated": "2026-08-20T12:24:34Z",
+      "arxiv_categories": [
+        "cs.RO"
+      ],
+      "source_categories": [
+        "humanoid"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2608.19955v1",
+        "pdf": "https://arxiv.org/pdf/2608.19955v1"
+      },
+      "primary_category": "humanoid",
+      "categories": [
+        "Humanoid"
+      ],
+      "category_keys": [
+        "humanoid"
+      ],
+      "category_color": "#8e5a2f",
+      "keywords": [
+        "bipedal",
+        "locomotion",
+        "reinforcement learning",
+        "control",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "2608.19443v1",
+      "title": "Hybrid Feedback Sampling for Sample-Efficient Model Predictive Control",
+      "abstract": "Thanks to its parallelizability and flexibility, sampling-based Model Predictive Control (MPC) has become widely popular for controlling real-world robotic systems. However, for high-dimensional and open-loop unstable dynamical systems, the required number of samples to improve the control sequence will grow exponentially with the horizon, leading to poor sample efficiency and numerical instability. This paper investigates the instability of shooting methods in sampling-based MPC and shows that the optimal sampling proposal distribution can be realized by sampling with an optimized feedback policy. We refer to this algorithm as Feedback Sampling MPC (FS-MPC). FS-MPC involves a hybrid sampling design which balances local and global search based on the system stability and the available computation budget. Our theoretical analysis shows that our hybrid sampling approach achieves faster convergence than standard MPPI and better optimality than standard feedback sampling. Empirically, in diverse contact-rich control tasks like humanoid loco-manipulation and dexterous manipulation, we show that FS-MPC successfully tackles dynamically unstable tasks where standard sample-based approaches struggle, and strictly outperforms feedback policies alone. Finally, we validate our method on humanoid robot locomotion and manipulation tasks in the real world.",
+      "authors": [
+        "Chaoyi Pan",
+        "Zeji Yi",
+        "John Zhang",
+        "Zachary Manchester",
+        "Guannan Qu",
+        "Guanya Shi"
+      ],
+      "published": "2026-08-19T20:56:18Z",
+      "updated": "2026-08-19T20:56:18Z",
+      "arxiv_categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "source_categories": [
+        "humanoid"
+      ],
+      "links": {
+        "abstract": "https://arxiv.org/abs/2608.19443v1",
+        "pdf": "https://arxiv.org/pdf/2608.19443v1"
+      },
+      "primary_category": "humanoid",
+      "categories": [
+        "Humanoid",
+        "Manipulation"
+      ],
+      "category_keys": [
+        "humanoid",
+        "manipulation"
+      ],
+      "category_color": "#8e5a2f",
+      "keywords": [
+        "humanoid",
+        "locomotion",
+        "balance",
+        "manipulation",
+        "dexterous",
+        "contact-rich",
+        "control",
+        "cs.RO"
+      ]
+    },
     {
       "id": "2608.18234v1",
       "title": "GigaBrain-WBC-0.5: A Behavior World Model for Robust Whole-Body Control with Environment Interaction",
@@ -68,7 +258,7 @@
       ]
     },
     {
-      "id": "2608.17584v1",
+      "id": "2608.17584v2",
       "title": "HODAgent: Towards On-Demand, Responsive Humanoids for Physical World Human Interaction",
       "abstract": "We propose HODAgent, a System-2 embodied agent for humanoid robots in service settings, addressing situated intent, responsive execution, task revision, and outcome verification. Its semi-duplex architecture integrates an Env-Interactor, Planner, Executor, and hierarchical Memory to maintain coherent interaction, planning, and task state during service episodes. This allows handling new requests during motion, retaining progress, revising actions, and grounding closure in execution outcomes. A shared interface connects simulation and physical robots (Unitree G1), isolating platform-specific control. In an interactive simulation with 164 cases, HODAgent achieves 84.8% and 91.5% Joint Success under two VLM backbones, outperforming baselines by 9.8 and 18.9 points. On physical robots, pass rates are 92% (atomic), 72% (composite), and 63.3% (complete tasks). On multiple embodied benchmarks, it improves over baselines by 0.7-9.0 points. Results show a unified System-2 agent enables adaptive humanoid service across simulation and reality.",
       "authors": [
@@ -83,7 +273,7 @@
         "Jie Chen"
       ],
       "published": "2026-08-18T09:49:16Z",
-      "updated": "2026-08-18T09:49:16Z",
+      "updated": "2026-08-20T04:11:45Z",
       "arxiv_categories": [
         "cs.RO"
       ],
@@ -91,8 +281,8 @@
         "humanoid"
       ],
       "links": {
-        "abstract": "https://arxiv.org/abs/2608.17584v1",
-        "pdf": "https://arxiv.org/pdf/2608.17584v1"
+        "abstract": "https://arxiv.org/abs/2608.17584v2",
+        "pdf": "https://arxiv.org/pdf/2608.17584v2"
       },
       "primary_category": "humanoid",
       "categories": [
@@ -564,46 +754,6 @@
         "multimodal",
         "control",
         "perception",
-        "cs.RO"
-      ]
-    },
-    {
-      "id": "2608.05647v1",
-      "title": "KILVO: Kinematic-Inertial-LiDAR-Visual Odometry with Robust Multimodal Adaptation for Humanoid Robots",
-      "abstract": "This article presents a kinematic-inertial-LiDAR-visual odometry for humanoid robots, called KILVO. Tailored to the platform features, requirements, and real-world complexity, it fully utilizes the sensors commonly equipped on humanoid robots, including joint encoders, IMU, LiDAR, and camera, within an asynchronous-sequential hybrid error-state iterated Kalman filter (ESIKF). Specifically, inertial data are used for prediction, leg kinematics are processed asynchronously at a high rate and provide proprioceptive constraints, while exteroception is updated sequentially, first by registering LiDAR points for geometric priors and then by updating the visual component via photometric errors. Moreover, the framework is elaborately designed with multimodal adaptation for resilience to sensor failures. A compact contact estimation module is also developed, sharing information with state estimation without additional sensors. Extensive experiments on public datasets and in the real world across multiple humanoid robots, gait patterns, and scenarios demonstrate that KILVO achieves highly competitive accuracy, efficiency, and output rates, with strong robustness against sensor degradation and failures, making it more suitable for humanoid robots than state-of-the-art fusion methods. Our code and datasets are released on GitHub.",
-      "authors": [
-        "Jixin Gao",
-        "Fucheng Liu",
-        "Teng Zhang",
-        "Fusheng Zha"
-      ],
-      "published": "2026-08-06T06:43:09Z",
-      "updated": "2026-08-06T06:43:09Z",
-      "arxiv_categories": [
-        "cs.RO"
-      ],
-      "source_categories": [
-        "humanoid"
-      ],
-      "links": {
-        "abstract": "https://arxiv.org/abs/2608.05647v1",
-        "pdf": "https://doi.org/10.1109/TMECH.2026.3721778"
-      },
-      "primary_category": "humanoid",
-      "categories": [
-        "Humanoid",
-        "Vision-Language-Action"
-      ],
-      "category_keys": [
-        "humanoid",
-        "vla"
-      ],
-      "category_color": "#8e5a2f",
-      "keywords": [
-        "humanoid",
-        "gait",
-        "multimodal",
-        "dataset",
         "cs.RO"
       ]
     }
