@@ -1,6 +1,12 @@
 name: Update Papers
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/fetch_papers.py
+      - tests/**
+      - .github/workflows/update-papers.yml
   schedule:
     # 08:20 Asia/Shanghai every day.
     - cron: '20 0 * * *'
@@ -8,6 +14,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: update-papers-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -21,8 +31,11 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Test paper fetcher
+        run: python -m unittest discover -s tests -v
+
       - name: Fetch latest arXiv papers
-        run: python scripts/fetch_papers.py --output data/papers.json --days 14 --per-category 45 --limit 140 --sleep 10 --retries 4
+        run: python scripts/fetch_papers.py --output data/papers.json --days 14 --per-category 45 --limit 140 --sleep 10 --retries 4 --fail-when-stale
 
       - name: Commit updated data
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -24,16 +24,30 @@ python3 -m http.server 8000
 
 ```bash
 cd paper-radar
-python3 scripts/fetch_papers.py --output data/papers.json --days 14 --per-category 45 --limit 140
+python3 scripts/fetch_papers.py --output data/papers.json --days 14 --per-category 45 --limit 140 --fail-when-stale
 ```
 
 脚本只使用 Python 标准库，不需要安装依赖。
+
+## 抓取异常与验证
+
+- 收到 HTTP 406 时，脚本会在等待后改用 arXiv 官方支持的 POST 查询，保留相同的关键词、排序和数量限制。HTTP 429 仍按 `Retry-After` 或指数退避重试。
+- 自动更新启用 `--fail-when-stale`：任一分类抓取失败，或过滤后没有近期论文时，保留原有 JSON 和更新时间，并让 Actions 明确失败，防止“绿色运行但持续停更”或不完整数据覆盖。
+- 本地省略该参数时，全部抓取失败仍可保留旧文件并正常退出；不建议在定时任务中省略。
+- 抓取脚本、测试或更新 workflow 推送到 `main` 后会立即运行一次更新；手动更新仍可通过 `Actions -> Update Papers -> Run workflow` 触发。
+- 查看 `Fetch latest arXiv papers` 日志中的各分类数量，并确认网站更新时间。任务失败时，网站继续展示上次成功的数据。
+
+运行回归测试：
+
+```bash
+python3 -m unittest discover -s tests -v
+```
 
 ## 部署到 GitHub Pages
 
 1. 将 `paper-radar` 目录内容推到一个 GitHub 仓库。
 2. 进入仓库 `Settings -> Actions -> General`，确保 workflow 有写入权限。
-3. 进入 `Settings -> Pages`，选择从 `main` 分支的根目录发布。
+3. 进入仓库 `Settings -> Pages`，将 Source 设为 `GitHub Actions`，由 `Deploy Pages` workflow 发布。
 4. 打开 `Actions -> Update Papers`，可先点 `Run workflow` 触发第一次更新。
 
 之后 GitHub Actions 会每天更新 `data/papers.json` 并自动提交，网页刷新即可看到新论文。

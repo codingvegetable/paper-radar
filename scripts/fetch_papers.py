@@ -26,6 +26,7 @@ ARXIV_APIS = ("https://export.arxiv.org/api/query",)
 ATOM_NS = {"atom": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
 DEFAULT_RETRY_BASE_SECONDS = 30.0
 MAX_RETRY_DELAY_SECONDS = 180.0
+MIN_REQUEST_INTERVAL_SECONDS = 3.1
 
 
 @dataclass(frozen=True)
@@ -211,14 +212,18 @@ def fetch_category(category_key: str, config: CategoryConfig, per_category: int,
         "sortBy": "submittedDate",
         "sortOrder": "descending",
     }
+    encoded_params = urllib.parse.urlencode(params)
     last_error: Optional[BaseException] = None
     for api_url in ARXIV_APIS:
-        url = f"{api_url}?{urllib.parse.urlencode(params)}"
-        for attempt in range(1, retries + 1):
+        method = "GET"
+        attempt = 1
+        while attempt <= retries:
             request = urllib.request.Request(
-                url,
+                f"{api_url}?{encoded_params}" if method == "GET" else api_url,
+                data=encoded_params.encode("utf-8") if method == "POST" else None,
                 headers={
-                    "User-Agent": "paper-radar/1.0 (daily arxiv digest; contact: local-user)",
+                    "User-Agent": "paper-radar/1.1 (+https://github.com/codingvegetable/paper-radar)",
+                    "Accept": "application/atom+xml",
                 },
             )
             try:
@@ -226,21 +231,35 @@ def fetch_category(category_key: str, config: CategoryConfig, per_category: int,
                     xml_data = response.read()
 
                 root = ET.fromstring(xml_data)
+                if root.tag != f"{{{ATOM_NS['atom']}}}feed":
+                    raise ET.ParseError("arXiv returned a non-Atom response")
                 return [parse_entry(entry, category_key) for entry in root.findall("atom:entry", ATOM_NS)]
             except (OSError, TimeoutError, ET.ParseError) as error:
                 last_error = error
+                if isinstance(error, urllib.error.HTTPError):
+                    if error.code == 406 and method == "GET":
+                        # arXiv officially supports form-encoded POST queries too.
+                        # Do not repeat a rejected GET with the same parameters.
+                        method = "POST"
+                        print(f"GET rejected for {config.label} (HTTP 406); trying POST.", flush=True)
+                        time.sleep(MIN_REQUEST_INTERVAL_SECONDS)
+                        continue
+                    if 400 <= error.code < 500 and error.code not in (408, 429):
+                        break
                 if attempt < retries:
                     delay = retry_delay_seconds(error, attempt)
-                    print(f"Retrying {config.label} in {delay:.1f}s after {error}", flush=True)
+                    print(f"Retrying {config.label} ({method}) in {delay:.1f}s after {error}", flush=True)
                     time.sleep(delay)
-                elif isinstance(error, urllib.error.HTTPError) and error.code == 429:
-                    break
+                attempt += 1
 
     raise RuntimeError(f"failed to fetch {config.label}: {last_error}")
 
 
 def parse_entry(entry: ET.Element, source_category: str) -> dict:
     entry_id = normalize_space(entry.findtext("atom:id", default="", namespaces=ATOM_NS))
+    if urllib.parse.urlparse(entry_id).path == "/api/errors":
+        message = normalize_space(entry.findtext("atom:summary", default="Unknown API error", namespaces=ATOM_NS))
+        raise ET.ParseError(f"arXiv API error: {message}")
     arxiv_id = entry_id.rstrip("/").split("/")[-1]
     title = normalize_space(entry.findtext("atom:title", default="", namespaces=ATOM_NS))
     abstract = normalize_space(entry.findtext("atom:summary", default="", namespaces=ATOM_NS))
@@ -376,22 +395,28 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=120, help="Maximum papers to keep in the output")
     parser.add_argument("--sleep", type=float, default=8.0, help="Seconds between arXiv API requests")
     parser.add_argument("--retries", type=int, default=4, help="Retries per arXiv endpoint")
-    parser.add_argument("--fail-when-stale", action="store_true", help="Fail instead of keeping the existing output when every fetch fails")
+    parser.add_argument("--fail-when-stale", action="store_true", help="Fail without replacing the output if any category fails or no recent papers are available")
     args = parser.parse_args()
 
     output = Path(args.output)
     papers_by_id: Dict[str, dict] = {}
+    failed_categories: List[str] = []
 
     for index, (key, config) in enumerate(CATEGORIES.items()):
         print(f"Fetching {config.label}...", flush=True)
         try:
             incoming = fetch_category(key, config, args.per_category, args.retries)
         except RuntimeError as error:
+            failed_categories.append(config.label)
             print(error, flush=True)
         else:
+            print(f"Fetched {len(incoming)} papers for {config.label}.", flush=True)
             merge_papers(papers_by_id, incoming)
         if index < len(CATEGORIES) - 1:
             time.sleep(args.sleep)
+
+    if failed_categories and args.fail_when_stale:
+        raise SystemExit(f"Failed categories: {', '.join(failed_categories)}. Output left unchanged: {output}")
 
     if not papers_by_id:
         if output.exists() and not args.fail_when_stale:
@@ -402,6 +427,13 @@ def main() -> None:
     papers = enrich_papers(list(papers_by_id.values()))
     papers = filter_recent(papers, args.days)
     papers = sorted(papers, key=sort_key, reverse=True)[: args.limit]
+
+    if not papers:
+        message = f"No recent papers remain after filtering. Output left unchanged: {output}"
+        if output.exists() and not args.fail_when_stale:
+            print(message, flush=True)
+            return
+        raise SystemExit(message)
 
     write_payload(output, papers)
     print(f"Wrote {len(papers)} papers to {output}", flush=True)
